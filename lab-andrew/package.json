@@ -1,0 +1,29 @@
+{
+  "name": "lab-andrew",
+  "version": "1.0.0",
+  "description": "bsts-and-hash-tables",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest -i --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALB37/20-hash-table-with-bst.git"
+  },
+  "keywords": [
+    "binary-search-trees",
+    "hash-tables"
+  ],
+  "author": "Andrew Bloom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ALB37/20-hash-table-with-bst/issues"
+  },
+  "homepage": "https://github.com/ALB37/20-hash-table-with-bst#readme",
+  "devDependencies": {
+    "jest": "^22.0.4"
+  }
+}
