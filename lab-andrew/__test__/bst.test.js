@@ -53,8 +53,7 @@ describe('tests for bst.js', () => {
       expect(testTree.remove(999)).toEqual(-1);
 
     });
-    test.only('remove should be able to remove a leaf', () => {
-      console.log(testTree.root.left);
+    test('remove should be able to remove a leaf', () => {
       testTree.remove(3);
       expect(testTree.find(3)).toEqual(-1);
     });
@@ -103,7 +102,6 @@ describe('tests for bst.js', () => {
     });
 
     test('remove should account for removing nodes in all scenarios', () => {
-      console.log(testTree);
       testTree.insert(6);
       testTree.insert(4);
       testTree.insert(5);
@@ -114,6 +112,10 @@ describe('tests for bst.js', () => {
       testTree.remove(5);
       testTree.remove(11);
       expect(testTree.root).toBeNull();
+      testTree.insert(5);
+      testTree.insert(10);
+      testTree.remove(5);
+      expect(testTree.root.value).toEqual(10);
     });
   });
 

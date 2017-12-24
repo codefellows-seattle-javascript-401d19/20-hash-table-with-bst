@@ -14,7 +14,7 @@ class BST {
   }
 
   find(value){
-    if (typeof value !== 'number') {
+    if (typeof value !== 'number'){
       throw new TypeError('value must be a number');
     }
     return this._find(this.root, value);
@@ -44,12 +44,7 @@ class BST {
   }
 
   _insert(node, value){
-    // if (!node){
-    //   node = new BSTNode(value);
-    //   return;
-    // }
     if (node.value === value){
-      // console.log('hello');
       return -1;
     }
     if (value < node.value){
@@ -67,8 +62,32 @@ class BST {
   }
 
   remove(value){
-    if (typeof value !== 'number') {
-      throw new TypeError('value must be a number');
+    let node = this.find(value);
+    if (node === -1){
+      return -1;
+    }
+    if (node.left && node.right){
+      node.value = this._findMinValue(node.right);
+      if (node.value === node.right.value){
+        node.right = null;
+        return;
+      }
+      return this._remove(node.right, node.value);
+    }
+    if ((node.left && !node.right) || (!node.left && node.right)){
+      if (node === this.root){
+        if (this.root.left){
+          this.root = this.root.left;
+          return;
+        }
+        this.root = this.root.right;
+        return;
+      }
+      return this._remove(this.root, value);
+    }
+    if (node === this.root){
+      this.root = null;
+      return;
     }
     return this._remove(this.root, value);
   }
@@ -81,29 +100,35 @@ class BST {
   }
 
   _remove(node, value){
-    if (!node){
-      return -1;
+    if (value > node.value) {
+      if (node.right.value === value) {
+        if (!node.right.left && node.right.right) {
+          node.right = node.right.right;
+          return;
+        }
+        if (node.right.left && !node.right.right) {
+          node.right = node.right.left;
+          return;
+        }
+        node.right = null;
+        return;
+      }
+      return this._remove(node.right, value);
     }
-    if (node.value === value){
-      if (node.left && node.right){
-        node.value = this._findMinValue(node.right);
-        return this._remove(node.right, node.value);
-      }
-      if (node.left && !node.right){
-        node = node.left;
+
+    if (node.left.value === value) {
+      if (!node.left.left && node.left.right) {
+        node.left = node.left.right;
         return;
       }
-      if (!node.left && node.right){
-        node = node.right;
+      if (node.left.left && !node.left.right) {
+        node.left = node.left.left;
         return;
       }
-      node = null;
+      node.left = null;
       return;
     }
-    if (value < node.value){
-      return this._remove(node.left, value);
-    }
-    return this._remove(node.right, value);
+    return this._remove(node.left, value);
   }
 }
 
