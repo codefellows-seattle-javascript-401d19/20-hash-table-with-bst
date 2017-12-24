@@ -1,0 +1,22 @@
+{
+  "name": "lab-cameron",
+  "version": "1.0.0",
+  "description": "BST and Hash Table",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest -i --coverage || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CameronMoorehead/20-hash-table-with-bst.git"
+  },
+  "keywords": [
+    "Hash"
+  ],
+  "author": "Cameron Moorehead",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/CameronMoorehead/20-hash-table-with-bst/issues"
+  },
+  "homepage": "https://github.com/CameronMoorehead/20-hash-table-with-bst#readme"
+}
