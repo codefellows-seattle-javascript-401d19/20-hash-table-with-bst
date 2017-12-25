@@ -1,0 +1,14 @@
+{
+  "name": "lab-shannon",
+  "version": "1.0.0",
+  "description": "hash table using BST",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shannon",
+  "license": "MIT"
+}
