@@ -86,6 +86,27 @@ describe('hash-table.js', () => {
     });
   });
 
+  describe('table.get()', () => {
+    test('get() should return false if the hash table has no such key', () => {
+      const ht = new HashTable();
+
+      expect(ht.get('non-existing-key')).toEqual(false);
+    });
+
+    test('get() should return the hash table value associated with the passed in key', () => {
+      const ht = new HashTable();
+      const key1 = 'test';
+      const key2 = 'tset';
+      const htValue1 = 'this is a test value';
+      const htValue2 = 'this is a test value';
+
+      ht.set(key1, htValue1);
+      ht.set(key2, htValue2);
+      expect(ht.get(key1)).toEqual(htValue1);
+      expect(ht.get(key2)).toEqual(htValue2);
+    });
+  });
+
   describe('table.getBucketArr()', () => {
     test('getBucketArr() should return the hash tables internal bucket array', () => {
       const ht = new HashTable();
