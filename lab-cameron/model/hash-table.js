@@ -18,6 +18,7 @@ const HashTable = (() => {
       if (typeof key !== 'string') {
         throw new TypeError('__HASHTABLE_ERROR__ key should be a string');
       }
+
       let rawHash = 0;
 
       for (let i in key) {
@@ -33,10 +34,47 @@ const HashTable = (() => {
 
       if (!bucketArr[hash]) {
         bucketArr[hash] = new BinarySearchTree().insert({key, htValue});
-        return this;
+        return true;
       }
 
-      const node = bucketArr[hash].find(node => node.value.key === key);
+      const node = bucketArr[hash].find(key);
+
+      if (node) {
+        node.value.htValue = htValue;
+        return true;
+      }
+
+      bucketArr[hash].insert({key, htValue});
+      return true;
+    }
+
+    get(key) {
+      const hash = this._generateHash(key);
+      const bucketArr = buckets.get(this);
+      if (!bucketArr[hash]) {
+        return false;
+      }
+
+      const node = bucketArr[hash].find(key);
+
+      if (node) {
+        return node.value.htValue;
+      }
+    }
+
+    delete(key) {
+      const hash = this._generateHash(key);
+      const bucketArr = buckets.get(this);
+
+      if (!bucketArr[hash]) {
+        return false;
+      }
+
+      const node = bucketArr[hash].find(key);
+
+      if (node) {
+        bucketArr[hash] = bucketArr[hash].remove(key);
+      }
     }
   }
 
