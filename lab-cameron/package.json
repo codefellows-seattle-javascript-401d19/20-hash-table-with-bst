@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/CameronMoorehead/20-hash-table-with-bst/issues"
   },
-  "homepage": "https://github.com/CameronMoorehead/20-hash-table-with-bst#readme"
+  "homepage": "https://github.com/CameronMoorehead/20-hash-table-with-bst#readme",
+  "devDependencies": {
+    "jest": "^22.0.4"
+  }
 }
