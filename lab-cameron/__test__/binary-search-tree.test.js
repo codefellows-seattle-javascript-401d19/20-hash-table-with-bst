@@ -156,6 +156,8 @@ describe('binary-search-tree.js', () => {
       expect(BST.getNodeCount()).toEqual(3);
       expect(root.left.value).toEqual(five);
       expect(BST.remove('one')).toEqual(one.key);
+      expect(BST.getRoot().value).toEqual(two);
+      expect(BST.getNodeCount()).toEqual(2);
     });
   });
 });
