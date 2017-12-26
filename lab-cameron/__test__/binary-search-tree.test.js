@@ -71,8 +71,52 @@ describe('binary-search-tree.js', () => {
       BST.insert({key: 'four', htValue: 4});
       BST.insert({key: 'five', htValue: 5});
 
+      expect(BST.find('seven')).toEqual(null);
+    });
+
+    test('find() should return null if there is no such node in the tree', () => {
+      const BST = new BinarySearchTree();
+      BST.insert({key: 'one', htValue: 1});
+      BST.insert({key: 'two', htValue: 2});
+      BST.insert({key: 'three', htValue: 3});
+      BST.insert({key: 'four', htValue: 4});
+      BST.insert({key: 'five', htValue: 5});
+
       expect(BST.find('three').value.htValue).toEqual(3);
       expect(BST.find('five').value.htValue).toEqual(5);
+    });
+  });
+
+  describe('tree.insert()', () => {
+    test('insert() should insert nodes into the BST according to keys string value', () => {
+      const BST = new BinarySearchTree();
+      const one = { key: 'one', htValue: 1 };
+      const two = { key: 'two', htValue: 2 };
+      const three = { key: 'three', htValue: 3 };
+      const four = { key: 'four', htValue: 4 };
+      const five = { key: 'five', htValue: 5 };
+
+      expect(BST.getNodeCount()).toEqual(0);
+
+      BST.insert(one);
+      expect(BST.getNodeCount()).toEqual(1);
+
+
+      BST.insert(two);
+      expect(BST.getNodeCount()).toEqual(2);
+
+      BST.insert(three);
+      expect(BST.getNodeCount()).toEqual(3);
+
+      BST.insert(four);
+      expect(BST.getNodeCount()).toEqual(4);
+
+      BST.insert(five);
+      expect(BST.getNodeCount()).toEqual(5);
+
+      const root = BST.getRoot();
+
+      expect(root.left.value).toEqual(four);
     });
   });
 });

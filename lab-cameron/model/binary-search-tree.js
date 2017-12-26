@@ -44,7 +44,9 @@ const BinarySearchTree = function() {
 
   this.find = key => {
     const findNode = (node, key) => {
-      if (node.value.key > key) {
+      if (!node) {
+        return null;
+      } else if (node.value.key > key) {
         return findNode(node.left, key);
       } else if (node.value.key < key) {
         return findNode(node.right, key);
