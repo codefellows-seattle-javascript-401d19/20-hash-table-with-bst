@@ -33,7 +33,10 @@ const HashTable = (() => {
       const bucketArr = buckets.get(this);
 
       if (!bucketArr[hash]) {
-        bucketArr[hash] = new BinarySearchTree().insert({key, htValue});
+        const newBST = new BinarySearchTree();
+        newBST.insert({key, htValue});
+        
+        bucketArr[hash] = newBST;
         return true;
       }
 
@@ -51,7 +54,9 @@ const HashTable = (() => {
     get(key) {
       const hash = this._generateHash(key);
       const bucketArr = buckets.get(this);
+
       if (!bucketArr[hash]) {
+        console.log(bucketArr);
         return false;
       }
 
@@ -80,8 +85,5 @@ const HashTable = (() => {
 
   return HashTable;
 })();
-
-let test = new HashTable();
-console.log(test);
 
 module.exports = HashTable;

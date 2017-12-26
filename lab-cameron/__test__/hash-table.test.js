@@ -26,7 +26,18 @@ describe('hash-table.js', () => {
 
       expect(() => {
         ht._generateHash(notAString);
-      }).toThrow();
+      }).toThrow()  ;
+    });
+  });
+
+  describe('table.set()', () => {
+    test('set() should construct a BST with the inserted value pair into the bucket if the hash is new', () => {
+      const ht = new HashTable();
+      const key = 'test';
+      const value = 'this is a test value';
+
+      expect(ht.set(key, value)).toEqual(true);
+      console.log(ht.get('test'));
     });
   });
 });
