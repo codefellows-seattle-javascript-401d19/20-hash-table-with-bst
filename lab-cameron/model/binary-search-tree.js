@@ -56,8 +56,7 @@ const BinarySearchTree = function() {
     if (!root) {
       return null;
     } else {
-      findNode(root, key);
-      return;
+      return findNode(root, key);
     }
   };
 
@@ -129,15 +128,5 @@ const BinarySearchTree = function() {
     return result;
   };
 };
-
-let BST = new BinarySearchTree();
-BST.insert({key: 'one', htValue: 1});
-BST.insert({key: 'two', htValue: 2});
-BST.insert({key: 'three', htValue: 3});
-BST.insert({key: 'four', htValue: 4});
-BST.insert({key: 'five', htValue: 5});
-
-console.log(BST.remove('five'));
-console.log(BST.getRoot().left);
 
 module.exports = BinarySearchTree;
