@@ -96,37 +96,35 @@ const BinarySearchTree = function() {
         return node;
       } else {
         if (node.left === null && node.right === null) {
-          result = node.value;
+          result = node.value.key;
           node = null;
           nodeCount--;
           return node;
         }
 
         if (node.left === null) {
-          result = node.value;
+          result = node.value.key;
           node = node.right;
           nodeCount--;
           return node;
         } else if (node.right === null) {
-          result = node;
+          result = node.value.key;
           node = node.left;
           nodeCount--;
           return node;
         }
 
+        let tempResult = node.value.key;
         const temp = this.findMin(node.right);
         node.value = temp.value;
         node.right = removeNode(node.right, temp.value.key);
+        result = tempResult;
         return node;
       }
     };
 
     root = removeNode(root, key);
 
-    // Return result as Node
-    if (result) {
-      result = new Node(result);
-    }
     return result;
   };
 };

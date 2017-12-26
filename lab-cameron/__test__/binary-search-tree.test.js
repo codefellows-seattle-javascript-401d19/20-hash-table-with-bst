@@ -117,6 +117,45 @@ describe('binary-search-tree.js', () => {
       const root = BST.getRoot();
 
       expect(root.left.value).toEqual(four);
+      expect(root.left.left.value).toEqual(five) ;
+      expect(root.right.value).toEqual(two);
+      expect(root.right.left.value).toEqual(three);
+    });
+  });
+
+  describe('tree.remove()', () => {
+    test('remove() should remove the node with the provided key from the tree and return it', () => {
+      const BST = new BinarySearchTree();
+      const one = { key: 'one', htValue: 1 };
+      const two = { key: 'two', htValue: 2 };
+      const three = { key: 'three', htValue: 3 };
+      const four = { key: 'four', htValue: 4 };
+      const five = { key: 'five', htValue: 5 };
+
+      BST.insert(one);
+      BST.insert(two);
+      BST.insert(three);
+      BST.insert(four);
+      BST.insert(five);
+
+      const root = BST.getRoot();
+
+      // check node counts, tree structure and removed node before and after
+      expect(BST.getNodeCount()).toEqual(5);
+      expect(root.right.left.value).toEqual(three);
+      expect(BST.remove('three')).toEqual(three.key);
+      expect(root.right.left).toEqual(null);
+      expect(BST.getNodeCount()).toEqual(4);
+
+      expect(BST.getNodeCount()).toEqual(4);
+      expect(root.left.value).toEqual(four);
+      expect(BST.remove('four')).toEqual(four.key);
+      expect(root.left.value).toEqual(five);
+      expect(BST.getNodeCount()).toEqual(3);
+
+      expect(BST.getNodeCount()).toEqual(3);
+      expect(root.left.value).toEqual(five);
+      expect(BST.remove('one')).toEqual(one.key);
     });
   });
 });
