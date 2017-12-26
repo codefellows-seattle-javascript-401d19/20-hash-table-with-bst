@@ -64,21 +64,36 @@ describe('hash-table.js', () => {
 
       ht.set(key, htValue1);
       expect(bucketArr[hashCode].getRoot().value.htValue).toEqual(htValue1);
+
       ht.set(key, htValue2);
       expect(bucketArr[hashCode].getRoot().value.htValue).toEqual(htValue2);
+    });
+
+    test('set() should add to the hash tables internal BST via insertion if a collision occurs', () => {
+      const ht = new HashTable();
+      const key1 = 'test';
+      const key2 = 'tset';
+      const htValue1 = 'this is a test value';
+      const htValue2 = 'this is a different value';
+      const hashCode = ht._generateHash(key1);
+      const bucketArr = ht.getBucketArr();
+
+      ht.set(key1, htValue1);
+      expect(bucketArr[hashCode].getRoot().value.htValue).toEqual(htValue1);
+
+      ht.set(key2, htValue2);
+      expect(bucketArr[hashCode].getRoot().right.value.htValue).toEqual(htValue2);
     });
   });
 
   describe('table.getBucketArr()', () => {
-    test.skip('getBucketArr() should return the hash tables internal bucket array', () => {
+    test('getBucketArr() should return the hash tables internal bucket array', () => {
       const ht = new HashTable();
       const key = 'test';
       const value = 'this is a test value';
-      const hashCode = ht._generateHash(key)
-      // const ht.getBuc
 
       ht.set(key, value);
-      console.log(ht.getBucketArr());
+      expect(Array.isArray(ht.getBucketArr())).toEqual(true);
     });
   });
 });

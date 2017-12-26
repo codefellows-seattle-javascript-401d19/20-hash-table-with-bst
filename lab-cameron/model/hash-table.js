@@ -28,6 +28,12 @@ const HashTable = (() => {
       return rawHash % capacity.get(this);
     }
 
+    getBucketArr() {
+      const bucketArr = buckets.get(this);
+
+      return bucketArr;
+    }
+
     set(key, htValue) {
       const hash = this._generateHash(key);
       const bucketArr = buckets.get(this);
@@ -79,12 +85,6 @@ const HashTable = (() => {
       if (node) {
         bucketArr[hash] = bucketArr[hash].remove(key);
       }
-    }
-
-    getBucketArr() {
-      const bucketArr = buckets.get(this);
-      
-      return bucketArr;
     }
   }
 
