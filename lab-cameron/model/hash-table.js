@@ -4,8 +4,8 @@ const BinarySearchTree = require('./binary-search-tree');
 
 const HashTable = (() => {
   // make capacity and buckets private
-  const capacity = new WeakSet();
-  const buckets = new WeakSet();
+  const capacity = new WeakMap();
+  const buckets = new WeakMap();
 
   class HashTable {
     constructor() {
@@ -79,6 +79,9 @@ const HashTable = (() => {
   }
 
   return HashTable;
-});
+})();
+
+let test = new HashTable();
+console.log(test);
 
 module.exports = HashTable;
