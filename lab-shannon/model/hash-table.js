@@ -53,7 +53,22 @@ class HashTable{
       return node.value.HTvalue;
     }
   }
-  remove(key){}
+
+  remove(key){
+    let hash = this._hash(key);
+
+    if(!this._buckets[hash]){
+      return undefined;
+    }
+
+    let node = this._buckets[hash].find(node => node.value.key === key);
+    if(!node){
+      return undefined;
+    }
+
+    this._buckets[hash] = this._buckets[hash].remove(node);
+    return;
+  }
 }
 
 module.exports = HashTable;
