@@ -1,5 +1,7 @@
 'use strict';
 
+const BinarySearchTree = require(`./binary-search-tree`);
+
 class HashTable{
   constructor(capacity = 1024){
     this._capacity = capacity;
@@ -21,9 +23,36 @@ class HashTable{
     }
     return hash % this._capacity;
   }
-  
-  set(key){}
-  get(key){}
+
+  set(key, HTvalue){
+    let hash = this._hash(key);
+    if(!this._buckets[hash]){
+      this._buckets[hash] = new BinarySearchTree({key, HTvalue});
+
+      return this;
+    }
+
+    let node = this._buckets[hash].find(node => node.key.value === value);
+    if(node){
+      node.value.HTvalue = HTvalue;
+      return this;
+    }
+    this._buckets[hash].insert({key, HTvalue});
+    return this;
+  }
+
+  get(key){
+    let hash = this._hash(key);
+
+    if(!this._buckets[hash]){
+      return;
+    }
+
+    let node = this._buckets[hash].find(node => node.value.key === key);
+    if(node !== null){
+      return node.value.HTvalue;
+    }
+  }
   remove(key){}
 }
 

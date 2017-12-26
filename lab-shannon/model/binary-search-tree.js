@@ -22,9 +22,6 @@ class BinarySearchTree{
     }
   }
   _insert(node, value){
-    if(typeof value !== 'number'){
-      throw new TypeError(`You can only insert numbers`);
-    }
     if(node.value === value){
       throw new TypeError(`That value is already present; You cannot create duplicate numbers`);
     }
