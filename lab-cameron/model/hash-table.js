@@ -63,6 +63,8 @@ const HashTable = (() => {
 
       if (!bucketArr[hash]) {
         return false;
+      } else if (bucketArr[hash].getRoot() === null) {
+        return false;
       }
 
       const node = bucketArr[hash].find(key);
@@ -83,7 +85,7 @@ const HashTable = (() => {
       const node = bucketArr[hash].find(key);
 
       if (node) {
-        bucketArr[hash] = bucketArr[hash].remove(key);
+        bucketArr[hash].remove(key);
       }
     }
   }

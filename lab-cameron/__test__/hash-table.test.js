@@ -31,6 +31,17 @@ describe('hash-table.js', () => {
     });
   });
 
+  describe('table.getBucketArr()', () => {
+    test('getBucketArr() should return the hash tables internal bucket array', () => {
+      const ht = new HashTable();
+      const key = 'test';
+      const value = 'this is a test value';
+
+      ht.set(key, value);
+      expect(Array.isArray(ht.getBucketArr())).toEqual(true);
+    });
+  });
+
   describe('table.set()', () => {
     test('set() should should return true if there are no errors', () => {
       const ht = new HashTable();
@@ -107,14 +118,23 @@ describe('hash-table.js', () => {
     });
   });
 
-  describe('table.getBucketArr()', () => {
-    test('getBucketArr() should return the hash tables internal bucket array', () => {
+  describe('table.delete()', () => {
+    test('delete() should return false if there is no bucket associated with the key', () => {
+      const ht = new HashTable();
+
+      expect(ht.delete('fake-key')).toEqual(false);
+    });
+
+    test('delete() should remove the node from the buckets BST if there are no errors', () => {
       const ht = new HashTable();
       const key = 'test';
-      const value = 'this is a test value';
+      const htValue = 'this is a test value';
 
-      ht.set(key, value);
-      expect(Array.isArray(ht.getBucketArr())).toEqual(true);
+      ht.set(key, htValue);
+      expect(ht.get(key)).toEqual(htValue);
+
+      ht.delete(key);
+      expect(ht.get(key)).toEqual(false);
     });
   });
 });
