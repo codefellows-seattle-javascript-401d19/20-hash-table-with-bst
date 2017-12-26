@@ -114,10 +114,12 @@ const BinarySearchTree = function() {
           return node;
         }
 
-        let tempResult = node.value.key;
+        const tempResult = node.value.key;
+        
         const temp = this.findMin(node.right);
         node.value = temp.value;
         node.right = removeNode(node.right, temp.value.key);
+
         result = tempResult;
         return node;
       }

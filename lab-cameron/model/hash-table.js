@@ -35,7 +35,7 @@ const HashTable = (() => {
       if (!bucketArr[hash]) {
         const newBST = new BinarySearchTree();
         newBST.insert({key, htValue});
-        
+
         bucketArr[hash] = newBST;
         return true;
       }
@@ -56,7 +56,6 @@ const HashTable = (() => {
       const bucketArr = buckets.get(this);
 
       if (!bucketArr[hash]) {
-        console.log(bucketArr);
         return false;
       }
 
@@ -80,6 +79,12 @@ const HashTable = (() => {
       if (node) {
         bucketArr[hash] = bucketArr[hash].remove(key);
       }
+    }
+
+    getBucketArr() {
+      const bucketArr = buckets.get(this);
+      
+      return bucketArr;
     }
   }
 
