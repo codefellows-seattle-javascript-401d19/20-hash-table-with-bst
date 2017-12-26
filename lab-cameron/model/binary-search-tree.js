@@ -11,14 +11,10 @@ const BinarySearchTree = function() {
   let nodeCount = 0;
 
   this.insert = value => {
-    if (typeof value !== 'number') {
-      throw new TypeError('value should be a number');
-    }
-
     const newNode = new Node(value);
 
     const insertValue = (node, newNode) => {
-      if (node.value >= newNode.value) {
+      if (node.value.key >= newNode.value.key) {
         if (!node.left) {
           node.left = newNode;
           nodeCount++;
@@ -46,6 +42,25 @@ const BinarySearchTree = function() {
     }
   };
 
+  this.find = key => {
+    const findNode = (node, key) => {
+      if (node.value.key > key) {
+        return findNode(node.left, key);
+      } else if (node.value.key < key) {
+        return findNode(node.right, key);
+      } else {
+        return node;
+      }
+    };
+
+    if (!root) {
+      return null;
+    } else {
+      findNode(root, key);
+      return;
+    }
+  };
+
   this.getNodeCount = () => {
     return nodeCount;
   };
@@ -65,17 +80,18 @@ const BinarySearchTree = function() {
     return node;
   };
 
-  this.remove = value => {
+  this.remove = key => {
     let result = null;
-    const removeNode = (node, value) => {
+
+    const removeNode = (node, key) => {
       if (node === null) {
         return null;
       }
-      if (value < node.value) {
-        node.left = removeNode(node.left, value);
+      if (key < node.value.key) {
+        node.left = removeNode(node.left, key);
         return node;
-      } else if (value > node.value) {
-        node.right = removeNode(node.right, value);
+      } else if (key > node.value.key) {
+        node.right = removeNode(node.right, key);
         return node;
       } else {
         if (node.left === null && node.right === null) {
@@ -99,12 +115,12 @@ const BinarySearchTree = function() {
 
         const temp = this.findMin(node.right);
         node.value = temp.value;
-        node.right = removeNode(node.right, temp.value);
+        node.right = removeNode(node.right, temp.value.key);
         return node;
       }
     };
 
-    root = removeNode(root, value);
+    root = removeNode(root, key);
 
     // Return result as Node
     if (result) {
