@@ -76,6 +76,8 @@ class BinarySearchTree{
   }
 
   _remove(node, key, parent){
+    // console.log(node, `is the node`);
+    // console.log(key, `is the key provided`);
     if(!node){
       return null;
     }
@@ -86,13 +88,14 @@ class BinarySearchTree{
         return;
       }
       else if(node.left){
-        if(parent.right.value.key === key){
-          parent.right = node.left;
+        if(parent){
+          if(parent.right.value.key === key){
+            parent.right = node.left;
+          }
+          else if(parent.left.value.key === key){
+            parent.left = node.left;
+          }
         }
-        else if(parent.left.value.key === key){
-          parent.left = node.left;
-        }
-        return;
       }
       else if(node.right){
         if(parent.right.value.key === key){
@@ -104,23 +107,27 @@ class BinarySearchTree{
         return;
       }
       else{
-        if(parent.left.value.key === key){
-          parent.left = null;
-        }
-        else if(parent.right.value.key === key){
-          parent.right = null;
+        if(parent){
+          if(parent.left.value.key === key){
+            parent.left = null;
+          }
+          else if(parent.right.value.key === key){
+            parent.right = null;
+          }
+        }else{
+          return null;
         }
       }
       return;
     }
     else if(node.value.key > key){
-      if(node.left.value){
+      if(node.left){
         this._remove(node.left, key, node);
       }
       return null;
     }
     else if(node.value.key < key){
-      if(node.right.value){
+      if(node.right){
         this._remove(node.right, key, node);
       }
       return null;

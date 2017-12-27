@@ -64,14 +64,13 @@ class HashTable{
     if(!this._buckets[hash]){
       return undefined;
     }
-
     let node = this._buckets[hash].find(key);
     if(!node){
       return undefined;
     }
 
-    this._buckets[hash] = this._buckets[hash].remove(node);
-    return;
+    this._buckets[hash] = this._buckets[hash].remove(node.value.key);
+    return this._buckets[hash];
   }
 }
 

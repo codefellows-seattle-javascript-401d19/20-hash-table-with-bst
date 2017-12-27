@@ -6,10 +6,10 @@ describe(`HASH TABLE`, () => {
   test(`SET should hash the key and store the key:value pair in the bucket with the index corresponding to the hash`, () => {
     let hashTable = new HashTable();
     hashTable.set('cat', 'tabby');
-    // expect(hashTable._buckets).toEqual(expect.arrayContaining(['TreeNode']));
+    expect(hashTable.set('lobster', 'spiny')).toBeTruthy();
   });
 
-  test.only(`GET should retrieve the entry with the matching key`, () => {
+  test(`GET should retrieve the entry with the matching key`, () => {
     let hashTable = new HashTable();
     hashTable.set('cake', 'chocolate');
     expect(hashTable.get('cake')).toBeTruthy();
@@ -20,8 +20,10 @@ describe(`HASH TABLE`, () => {
     expect(hashTable.get('llama')).toBeNull();
   });
 
-  test(`REMOVE should remove the entry with the matching key from the hash table`, () => {
-
+  test.only(`REMOVE should remove the entry with the matching key from the hash table`, () => {
+    let hashTable = new HashTable();
+    hashTable.set('quintin', 'tarantula');
+    expect(hashTable.remove('quintin')).toBeNull();
   });
 
   test(`REMOVE should return undefined if no entry is found with a matching key`, () => {
