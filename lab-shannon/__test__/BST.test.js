@@ -24,30 +24,30 @@ describe(`BST`, () => {
     }).toThrow();
   });
 
+  test(`FIND should return the node with a value matching the value argument provided`, () => {
+
+  });
+
+  test.only(`FIND should return null if no node is found with a matching value`, () => {
+    let tree = new BinarySearchTree();
+    expect(tree.find('musketeers')).toBeNull();
+  });
+
   test(`REMOVE should remove the specified value from the BST and restructure nodes as necessary to maintain the sorted order`, () => {
     let tree = new BinarySearchTree();
-    tree.insert({cat: 'tabby'});
-    // tree.insert();
-    // tree.insert();
-    // tree.insert();
-    // tree.insert();
-    // tree.insert();
-    // tree.insert();
-    // tree.insert();
-    // tree.insert();
-    // tree.insert();
-    // tree.insert();
+    tree.insert({key: 'human', HTvalue: 'mowgli'});
+    tree.insert({key: 'tiger', HTvalue: 'shere khan'});
+    tree.insert({key: 'panther', HTvalue: 'bagheera'});
+    tree.insert({key: 'bear', HTvalue: 'baloo'});
+    tree.insert({key: 'elephant', HTvalue: 'hathi'});
+    tree.insert({key: 'python', HTvalue: 'kaa'});
 
-    // tree.remove();
-    // expect(tree.root.left.left).toEqual(null);
+    tree.remove('tiger');
+    expect(tree.root.left.value.key).toEqual('bear');
+  });
 
-    // tree.remove();
-    // expect(tree.root.left.right.value).toEqual();
-    //
-    // tree.remove();
-    // expect(tree.root.right.value).toEqual();
-    // expect(tree.root.right.left.value).toEqual();
-    // expect(tree.root.right.right.value).toEqual();
-    // expect(tree.root.right.right.right.value).toEqual();
+  test(`REMOVE should return null if no entry is found with a matching key`, () => {
+    let tree = new BinarySearchTree();
+    expect(tree.remove('wolf')).toBeNull();
   });
 });
