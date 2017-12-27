@@ -13,8 +13,11 @@ describe(`BST`, () => {
     expect(tree.root.right.value).toEqual(17);
   });
   test(`INSERT should throw an error if a node already exists with the specified value`, () => {
+    let tree = new BinarySearchTree();
+    tree.insert(4);
+    
     expect(() => {
-      tree.insert(4)
+      tree.insert(4);
     }).toThrow();
   });
 

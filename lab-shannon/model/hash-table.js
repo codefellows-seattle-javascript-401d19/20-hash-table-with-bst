@@ -53,6 +53,8 @@ class HashTable{
     let node = this._buckets[hash].find(key);
     if(node !== null){
       return node.value.HTvalue;
+    }else{
+      return null;
     }
   }
 
@@ -63,7 +65,7 @@ class HashTable{
       return undefined;
     }
 
-    let node = this._buckets[hash].find(node => node.value.key === key);
+    let node = this._buckets[hash].find(key);
     if(!node){
       return undefined;
     }

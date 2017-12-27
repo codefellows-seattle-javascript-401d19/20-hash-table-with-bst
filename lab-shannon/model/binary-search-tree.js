@@ -44,8 +44,8 @@ class BinarySearchTree{
   }
 
   find(key){
-  return this._find(this.root, key);
-}
+    return this._find(this.root, key);
+  }
 
   _find(node, key){
     if(!node){
@@ -75,53 +75,53 @@ class BinarySearchTree{
     return this._remove(this.root, value);
   }
 
-  _remove(node, value, parent){
+  _remove(node, key, parent){
     if(!node){
       return null;
     }
-    else if(node.value === value){
+    else if(node.value.key === key){
       if(node.left && node.right){
         node.value = this._findBiggest(node.left);  // this copies the value of the smallest node on the left branch and assigns it as the new value of the 'deleted' node
-        this._remove(node.left, node.value, node);    // this finds the duplicate value and deletes it
+        this._remove(node.left, node.value.key, node);    // this finds the duplicate value and deletes it
         return;
       }
       else if(node.left){
-        if(parent.right.value === value){
+        if(parent.right.value.key === key){
           parent.right = node.left;
         }
-        else if(parent.left.value === value){
+        else if(parent.left.value.key === key){
           parent.left = node.left;
         }
         return;
       }
       else if(node.right){
-        if(parent.right.value === value){
+        if(parent.right.value.key === key){
           parent.right = node.right;
         }
-        else if(parent.left.value === value){
+        else if(parent.left.value.key === key){
           parent.left = node.right;
         }
         return;
       }
       else{
-        if(parent.left.value === value){
+        if(parent.left.value.key === key){
           parent.left = null;
         }
-        else if(parent.right.value === value){
+        else if(parent.right.value.key === key){
           parent.right = null;
         }
       }
       return;
     }
-    else if(node.value > value){
+    else if(node.value.key > key){
       if(node.left.value){
-        this._remove(node.left, value, node);
+        this._remove(node.left, key, node);
       }
       return null;
     }
-    else if(node.value < value){
+    else if(node.value.key < key){
       if(node.right.value){
-        this._remove(node.right, value, node);
+        this._remove(node.right, key, node);
       }
       return null;
     }

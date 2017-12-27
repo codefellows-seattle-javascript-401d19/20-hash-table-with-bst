@@ -1,7 +1,6 @@
 'use strict';
 
 const HashTable = require(`../model/hash-table`);
-const BinarySearchTree = require(`../model/binary-search-tree`);
 
 describe(`HASH TABLE`, () => {
   test(`SET should hash the key and store the key:value pair in the bucket with the index corresponding to the hash`, () => {
@@ -17,11 +16,18 @@ describe(`HASH TABLE`, () => {
     // expect()
   });
 
-  test.only(`GET should return null if no entry was found with a matching key`, () => {
+  test(`GET should return null if no entry is found with a matching key`, () => {
     let hashTable = new HashTable();
 
-    expect(hashTable.get('unicorn')).toBeNull();
+    expect(hashTable.get('llama')).toBeNull();
   });
 
-  test(`REMOVE should `, () => {});
+  test(`REMOVE should remove the entry with the matching key from the hash table`, () => {
+
+  });
+
+  test.only(`REMOVE should return undefined if no entry is found with a matching key`, () => {
+    let hashTable = new HashTable();
+    expect(hashTable.remove('snow')).toEqual(undefined);
+  });
 });
