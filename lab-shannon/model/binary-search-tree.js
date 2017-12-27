@@ -21,11 +21,12 @@ class BinarySearchTree{
       this._insert(this.root, value);
     }
   }
+
   _insert(node, value){
-    if(node.value === value){
+    if(node.value.key === value.key){
       throw new TypeError(`That value is already present; You cannot create duplicate numbers`);
     }
-    if(node.value > value){
+    if(node.value.key > value.key){
       if(!node.left){
         node.left = new TreeNode(value);
         return;
@@ -33,7 +34,7 @@ class BinarySearchTree{
       this._insert(node.left, value);
       return;
     }
-    if(node.value < value){
+    if(node.value.key < value.key){
       if(!node.right){
         node.right = new TreeNode(value);
         return;
@@ -76,8 +77,6 @@ class BinarySearchTree{
   }
 
   _remove(node, key, parent){
-    // console.log(node, `is the node`);
-    // console.log(key, `is the key provided`);
     if(!node){
       return null;
     }

@@ -30,7 +30,6 @@ class HashTable{
       let BST = new BinarySearchTree();
       BST.insert({key, HTvalue});
       this._buckets[hash] = BST;
-
       return this;
     }
 

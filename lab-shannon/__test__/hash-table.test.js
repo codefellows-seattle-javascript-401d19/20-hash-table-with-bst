@@ -20,7 +20,7 @@ describe(`HASH TABLE`, () => {
     expect(hashTable.get('llama')).toBeNull();
   });
 
-  test.only(`REMOVE should remove the entry with the matching key from the hash table`, () => {
+  test(`REMOVE should remove the entry with the matching key from the hash table`, () => {
     let hashTable = new HashTable();
     hashTable.set('quintin', 'tarantula');
     expect(hashTable.remove('quintin')).toBeNull();
