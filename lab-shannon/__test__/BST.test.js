@@ -15,13 +15,13 @@ describe(`BST`, () => {
   test(`INSERT should throw an error if a node already exists with the specified value`, () => {
     let tree = new BinarySearchTree();
     tree.insert(4);
-    
+
     expect(() => {
       tree.insert(4);
     }).toThrow();
   });
 
-  test(`REMOVE should remove the specified value from the BST and restructure nodes as necessary to maintain the sorted order`, () => {
+  test.only(`REMOVE should remove the specified value from the BST and restructure nodes as necessary to maintain the sorted order`, () => {
     let tree = new BinarySearchTree();
     tree.insert(9);
     tree.insert(4);
@@ -36,6 +36,7 @@ describe(`BST`, () => {
     tree.insert(27);
 
     tree.remove(3);
+    console.log(tree.root.left);
     expect(tree.root.left.left).toEqual(null);
 
     tree.remove(8);
