@@ -25,10 +25,17 @@ describe(`BST`, () => {
   });
 
   test(`FIND should return the node with a value matching the value argument provided`, () => {
+    let tree = new BinarySearchTree();
+    tree.insert({key: 'Athos', HTvalue: 'musketeer one'});
+    tree.insert({key: 'Aramis', HTvalue: 'muusketeer two'});
+    tree.insert({key: 'Porthos', HTvalue: 'muusketeer three'});
+    tree.insert({key: `D'Artagnan`, HTvalue: 'muusketeer four'});
 
+    expect(tree.find('Athos')).toBeTruthy();
+    expect(tree.find('Aramis').value.key).toEqual('Aramis');
   });
 
-  test.only(`FIND should return null if no node is found with a matching value`, () => {
+  test(`FIND should return null if no node is found with a matching value`, () => {
     let tree = new BinarySearchTree();
     expect(tree.find('musketeers')).toBeNull();
   });
