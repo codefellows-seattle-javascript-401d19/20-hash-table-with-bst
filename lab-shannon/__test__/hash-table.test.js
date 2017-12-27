@@ -9,16 +9,14 @@ describe(`HASH TABLE`, () => {
     // expect(hashTable._buckets).toEqual(expect.arrayContaining(['TreeNode']));
   });
 
-  test(`GET should retrieve the entry with the matching key`, () => {
+  test.only(`GET should retrieve the entry with the matching key`, () => {
     let hashTable = new HashTable();
     hashTable.set('cake', 'chocolate');
-    hashTable.get('cake');
-    // expect()
+    expect(hashTable.get('cake')).toBeTruthy();
   });
 
   test(`GET should return null if no entry is found with a matching key`, () => {
     let hashTable = new HashTable();
-
     expect(hashTable.get('llama')).toBeNull();
   });
 
@@ -26,7 +24,7 @@ describe(`HASH TABLE`, () => {
 
   });
 
-  test.only(`REMOVE should return undefined if no entry is found with a matching key`, () => {
+  test(`REMOVE should return undefined if no entry is found with a matching key`, () => {
     let hashTable = new HashTable();
     expect(hashTable.remove('snow')).toEqual(undefined);
   });
