@@ -22,12 +22,16 @@ class HashTable {
     return rawHash % this._capacity;
   }
 
-  set(key, htValue){
-    const hash = this._hash(key);
+  _treeHash(key){
     const keyArr = key.split('');
-    const uniqueKeyInt = keyArr.reduce((acc, val, index) => {
+    return keyArr.reduce((acc, val, index) => {
       return acc + (val.charCodeAt() * (index + 1));
     }, 0);
+  }
+
+  set(key, htValue){
+    const hash = this._hash(key);
+    const uniqueKeyInt = this._treeHash(key);
     if (!this._buckets[hash]){
       this._buckets[hash] = new BST();
       this._buckets[hash].insert(uniqueKeyInt, htValue);
@@ -38,7 +42,8 @@ class HashTable {
       node.value = htValue;
       return this;
     }
-    return this._buckets[hash].insert(uniqueKeyInt, htValue);
+    this._buckets[hash].insert(uniqueKeyInt, htValue);
+    return this;
   }
 
   get(key){
@@ -46,15 +51,25 @@ class HashTable {
     if (!this._buckets[hash]){
       return undefined;
     }
-    const keyArr = key.split('');
-    const uniqueKeyInt = keyArr.reduce((acc, val, index) => {
-      return acc + (val.charCodeAt() * (index + 1));
-    }, 0);
+    const uniqueKeyInt = this._treeHash(key);
     const node = this._buckets[hash].find(uniqueKeyInt);
     if (!node){
       return undefined;
     }
     return node.value;
+  }
+
+  remove(key){
+    const hash = this._hash(key);
+    if (!this._buckets[hash]){
+      return -1;
+    }
+    const uniqueKeyInt = this._treeHash(key);
+    if (!this._buckets[hash].find(uniqueKeyInt)){
+      return -1;
+    }
+    this._buckets[hash].remove(uniqueKeyInt);
+    return this;
   }
 }
 
