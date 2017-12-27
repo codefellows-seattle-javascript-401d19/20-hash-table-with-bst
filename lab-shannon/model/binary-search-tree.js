@@ -43,22 +43,22 @@ class BinarySearchTree{
     }
   }
 
-  find(value){
-  return this._find(this.root, value);
+  find(key){
+  return this._find(this.root, key);
 }
 
-  _find(node, value){
+  _find(node, key){
     if(!node){
       return null;
     }
-    else if(node.value === value){
+    else if(node.value.key === key){
       return node;
     }
-    else if(node.value > value){
-      return this._find(node.left, value);
+    else if(node.value.key > key){
+      return this._find(node.left, key);
     }
-    else if(node.value < value){
-      return this._find(node.right, value);
+    else if(node.value.key < key){
+      return this._find(node.right, key);
     }
   }
 

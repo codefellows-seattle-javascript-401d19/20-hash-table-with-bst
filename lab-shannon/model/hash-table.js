@@ -50,10 +50,8 @@ class HashTable{
       return;
     }
 
-    let node = this._buckets[hash].find(node => node.root.value.key === key);
-    // let node = this._buckets[hash]
-    // console.log(node.root.value.key, `key found`);
-    // console.log(key, `key provided`);
+    // let node = this._buckets[hash].find(node => node.root.value.key === key);
+    let node = this._buckets[hash].find(key);
     if(node !== null){
       return node.value.HTvalue;
     }
