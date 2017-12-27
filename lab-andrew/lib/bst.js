@@ -1,7 +1,8 @@
 'use strict';
 
 class BSTNode {
-  constructor(value, left, right){
+  constructor(key, value, left, right){
+    this.key = key;
     this.value = value;
     this.left = left;
     this.right = right;
@@ -13,66 +14,66 @@ class BST {
     this.root = null;
   }
 
-  find(value){
-    if (typeof value !== 'number'){
-      throw new TypeError('value must be a number');
+  find(key){
+    if (typeof key !== 'number'){
+      throw new TypeError('key must be a number');
     }
-    return this._find(this.root, value);
+    return this._find(this.root, key);
   }
 
-  _find(node, value){
+  _find(node, key){
+    if (!node){
+      return undefined;
+    }
+    if (key === node.key){
+      return node;
+    }
+    if (key < node.key){
+      return this._find(node.left, key);
+    }
+    return this._find(node.right, key);
+  }
+
+  insert(key, value){
+    if (typeof key !== 'number'){
+      throw new TypeError('key must be a number');
+    }
+    if (!this.root){
+      this.root = new BSTNode(key);
+    }
+    return this._insert(this.root, key, value);
+  }
+
+  _insert(node, key, value){
+    if (node.key === key){
+      return -1;
+    }
+    if (key < node.key){
+      if (!node.left){
+        node.left = new BSTNode(key, value);
+        return;
+      }
+      return this._insert(node.left, key);
+    }
+    if (!node.right){
+      node.right = new BSTNode(key, value);
+      return;
+    }
+    return this._insert(node.right, key);
+  }
+
+  remove(key){
+    let node = this.find(key);
     if (!node){
       return -1;
     }
-    if (value === node.value){
-      return node;
-    }
-    if (value < node.value){
-      return this._find(node.left, value);
-    }
-    return this._find(node.right, value);
-  }
-
-  insert(value){
-    if (typeof value !== 'number'){
-      throw new TypeError('value must be a number');
-    }
-    if (!this.root){
-      this.root = new BSTNode(value);
-    }
-    return this._insert(this.root, value);
-  }
-
-  _insert(node, value){
-    if (node.value === value){
-      return -1;
-    }
-    if (value < node.value){
-      if (!node.left){
-        node.left = new BSTNode(value);
-        return;
-      }
-      return this._insert(node.left, value);
-    }
-    if (!node.right){
-      node.right = new BSTNode(value);
-      return;
-    }
-    return this._insert(node.right, value);
-  }
-
-  remove(value){
-    let node = this.find(value);
-    if (node === -1){
-      return -1;
-    }
     if (node.left && node.right){
-      node.value = this._findMinValue(node.right);
-      if (node.value === node.right.value){
+      node.key = this._findMinKey(node.right);
+      if (node.key === node.right.key){
         node.right = null;
         return;
       }
-      return this._remove(node.right, node.value);
+      return this._remove(node.right, node.key);
     }
     if ((node.left && !node.right) || (!node.left && node.right)){
       if (node === this.root){
@@ -83,25 +84,25 @@ class BST {
         this.root = this.root.right;
         return;
       }
-      return this._remove(this.root, value);
+      return this._remove(this.root, key);
     }
     if (node === this.root){
       this.root = null;
       return;
     }
-    return this._remove(this.root, value);
+    return this._remove(this.root, key);
   }
 
-  _findMinValue(node){
+  _findMinKey(node){
     if (node.left){
-      return this._findMinValue(node.left);
+      return this._findMinKey(node.left);
     }
-    return node.value;
+    return node.key;
   }
 
-  _remove(node, value){
-    if (value > node.value) {
-      if (node.right.value === value) {
+  _remove(node, key){
+    if (key > node.key) {
+      if (node.right.key === key) {
         if (!node.right.left && node.right.right) {
           node.right = node.right.right;
           return;
@@ -113,10 +114,10 @@ class BST {
         node.right = null;
         return;
       }
-      return this._remove(node.right, value);
+      return this._remove(node.right, key);
     }
 
-    if (node.left.value === value) {
+    if (node.left.key === key) {
       if (!node.left.left && node.left.right) {
         node.left = node.left.right;
         return;
@@ -128,8 +129,8 @@ class BST {
       node.left = null;
       return;
     }
-    return this._remove(node.left, value);
+    return this._remove(node.left, key);
   }
 }
 
-module.exports = {BSTNode, BST};
+module.exports = BST;
