@@ -29,7 +29,7 @@ class HashTable{
     if(!this._buckets[hash]){
       let BST = new BinarySearchTree();
       BST.insert({key, HTvalue});
-      this._buckets[hash] = BST.root;
+      this._buckets[hash] = BST;
 
       return this;
     }
@@ -50,7 +50,10 @@ class HashTable{
       return;
     }
 
-    let node = this._buckets[hash].find(node => node.value.key === key);
+    let node = this._buckets[hash].find(node => node.root.value.key === key);
+    // let node = this._buckets[hash]
+    // console.log(node.root.value.key, `key found`);
+    // console.log(key, `key provided`);
     if(node !== null){
       return node.value.HTvalue;
     }

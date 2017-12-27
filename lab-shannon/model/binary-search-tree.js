@@ -43,6 +43,25 @@ class BinarySearchTree{
     }
   }
 
+  find(value){
+  return this._find(this.root, value);
+}
+
+  _find(node, value){
+    if(!node){
+      return null;
+    }
+    else if(node.value === value){
+      return node;
+    }
+    else if(node.value > value){
+      return this._find(node.left, value);
+    }
+    else if(node.value < value){
+      return this._find(node.right, value);
+    }
+  }
+
   _findBiggest(node){
     if(node.right){
       this._findBiggest(node.right);
