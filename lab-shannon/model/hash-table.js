@@ -47,10 +47,9 @@ class HashTable{
     let hash = this._hash(key);
 
     if(!this._buckets[hash]){
-      return;
+      return null;
     }
 
-    // let node = this._buckets[hash].find(node => node.root.value.key === key);
     let node = this._buckets[hash].find(key);
     if(node !== null){
       return node.value.HTvalue;
