@@ -34,7 +34,7 @@ module.exports = class HashTable{
     return rawHash % this._capacity;
   }
 
-  set(key,htValue){
+  set(key, value){
     // calculate hash
     // check if bucket is empty
     // update if neccesary
@@ -42,17 +42,17 @@ module.exports = class HashTable{
     let hash = this._generateHash(key);
 
     if(!this._buckets[hash]){//vinicio - create a new linked list if there is nothing
-      this._buckets[hash] = new BinarySearchTree({key,htValue});
+      this._buckets[hash] = new BinarySearchTree(key, value);
       return this;
     }
 
-    let node = this._buckets[hash].find(node => node.value.key === key);
+    let node = this._buckets[hash].find(key);
 
     if(node){
-      node.value.htValue = htValue;
+      node.value = value;
       return this;
     }
-    this._buckets[hash].append(new BinarySearchTree({key,htValue}));
+    this._buckets[hash].insert(new BinarySearchTree(key, value));
     return this;
   }
 
@@ -65,10 +65,10 @@ module.exports = class HashTable{
       return; //vinicio - return undefined;
 
     // vinicio - checkig if key is present wit existing hash
-    let node = this._buckets[hash].find(node => node.value.key === key);
+    let node = this._buckets[hash].find(key);
 
     if(node)
-      return node.value.htValue;
+      return node.value;
   }
 
   delete(key){
@@ -81,10 +81,11 @@ module.exports = class HashTable{
     if(!this._buckets[hash])
       return false;
 
-    let node = this._buckets[hash].find(node => node.value.key === key);
+    let node = this._buckets[hash].find(key);
+    console.log(node);
 
     if(node){
-      this._buckets[hash] = this._buckets[hash].remove(node);
+      this._buckets[hash] = this._buckets[hash].remove(key);
       return true;
     }
     return false;

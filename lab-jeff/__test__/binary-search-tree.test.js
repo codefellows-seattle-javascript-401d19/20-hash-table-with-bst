@@ -2,7 +2,7 @@
 
 const BinarySearchTree = require('../lib/binary-search-tree');
 
-describe.only('insert', () => {
+describe('insert', () => {
   test('Insert adds keys and values to the bst', () => {
     let bst = new BinarySearchTree('foo', 11);
     bst.insert(new BinarySearchTree('bar', 21));

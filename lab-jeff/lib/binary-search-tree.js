@@ -103,12 +103,12 @@ class BinarySearchTree{
           if(this.right){
             this.value = this.right.value;
             this.key = this.right.key;
-            this.right.remove(this.right.key);
+            this.right.remove(this.right.key, root);
             return;
           } else {
             this.value = this.left.value;
             this.key = this.left.key;
-            this.left.remove(this.left.key);
+            this.left.remove(this.left.key, root);
             return;
           }
         } else{//root to be removed and has no children
