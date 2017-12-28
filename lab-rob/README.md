@@ -19,6 +19,8 @@ Clone this repo, `cd` into `lab-rob`, run `npm install`.
 
 Or, copy the modules in the `lib/` directory into your project.
 
+## hash-table.js
+
 ### Constructor
 
 #### `new HashTable(capacity)`
@@ -67,7 +69,90 @@ myHash.remove('puppies');
 // removes and returns 128
 ```
 
-#### `.remove(value)`
+## binary-search-tree.js
+
+### Constructor
+
+Create a new binary search tree with the given key, value combo. Key must be a string but value can be anything. Creates an object with properties of key, value, and null left and right.
+
+```
+let bst = new BinarySearchTree('fun', 1);
+// returns the following object:
+{
+  key: 'fun',
+  value: 1,
+  left: null,
+  right: null,
+}
+```
+
+### Methods
+
+#### `insert(key, value)`
+
+Insert the key-value pair into the BST. Key must be a string, but value can be anything. Throws an error if key is not unique to the BST. Inserts into the appropriate open leaf based off of the key.
+
+```
+bst.insert('abba', 2);
+// bst now has the following shape
+{
+  key: 'fun',
+  value: 1,
+  left: {
+    key: 'abba',
+    value: 2,
+    left: null,
+    right: null,
+  },
+  right: null,
+}
+```
+
+#### `find(key)`
+
+Returns the node with the given key. Returns null if no node contains the key. Throws an error if key is not a string.
+
+```
+bst.find('abba');
+// returns the following object:
+{
+  key: 'abba',
+  value: 2,
+  left: null,
+  right: null,
+}
+```
+
+#### `findParentOf(key)`
+
+Returns the parent of the node with the given key. Returns null if the calling node has the key. Throws an error if no node has that key, or if key is not a string.
+
+```
+bst.findParentOf('abba')
+// returns bst
+
+bst.findParentOf('fun');
+// returns null
+```
+
+#### `getLefty()`
+
+Returns the smallest node from a given root.
+
+```
+bst.getLefty();
+// returns 
+{
+  key: 'abba',
+  value: 2,
+  left: null,
+  right: null,
+}
+```
+
+#### `remove(key)`
+
+Remove a key-value pair from the Binary Search Tree. If the pair to be removed is not the root node, then the node is either pruned (if a leaf), bypassed (if one child node), or restructured (if two child nodes). If the pair is in the root node then the root is reassigned (key, value, and right).
 
 ## Tests
 
