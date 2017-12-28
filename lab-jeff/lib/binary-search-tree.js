@@ -12,17 +12,15 @@ class BinarySearchTree{
     if(!(node instanceof BinarySearchTree))
       throw new TypeError('node must be an instance of BinarySearchTree');
 
-    if(node.key === this.key) //if the key already exists, reassign the value
+    if(node.key === this.key)
       this.value = node.value;
-
-
 
     if(node.key < this.key){
       if(!this.left){
         this.left = node;
         return;
       }
-      this.left.insert(node); // vinicio - recursive call
+      this.left.insert(node);
       return;
     }
     if(!this.right){
@@ -37,7 +35,6 @@ class BinarySearchTree{
     if(key === this.key)
       return this;
 
-    // vinicio - checking right sub-tre
     if(key > this.key){
       if(this.right !== null)
         return this.right.find(key);
@@ -57,8 +54,6 @@ class BinarySearchTree{
   }
 
   findParent(key, root){
-
-    console.log('root: ', root);
 
     if(key === root.key){
       return 'root';
@@ -88,7 +83,6 @@ class BinarySearchTree{
     if(this.key === key){ //value is found
 
       if(this === root){ //node to be removed is the root
-        console.log('node to remove is root');
         if(this.right && this.left){//root to be removed and has 2 children
           let minRight = this.findMin(this.right);
           this.value = minRight.value;
@@ -118,11 +112,7 @@ class BinarySearchTree{
           return;
         }
       } else { //if the node to be removed is not the root
-
-
-        console.log('value found.  node = ', this);
         parent = root.findParent(key, root);
-        console.log('parent: ', parent);
         if(this.right && this.left){ //node to remove has 2 children
           let minRight = this.findMin(this.right);
           this.value = minRight.value;

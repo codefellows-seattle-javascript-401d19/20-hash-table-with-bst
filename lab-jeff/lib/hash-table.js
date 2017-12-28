@@ -1,19 +1,5 @@
 'use strict';
-/* Hash Table
-  references to linked list
 
-  Values
-  Array called buckets
-    array is going to have a fixed size
-  capacity
-
-
-  Operations
-  hash function
-  set
-  get
-  remove
-*/
 const BinarySearchTree = require('./binary-search-tree');
 
 module.exports = class HashTable{
@@ -35,13 +21,9 @@ module.exports = class HashTable{
   }
 
   set(key, value){
-    // calculate hash
-    // check if bucket is empty
-    // update if neccesary
-    // create a new linked list if not (handle collisions)
     let hash = this._generateHash(key);
 
-    if(!this._buckets[hash]){//vinicio - create a new linked list if there is nothing
+    if(!this._buckets[hash]){
       this._buckets[hash] = new BinarySearchTree(key, value);
       return this;
     }
@@ -57,14 +39,10 @@ module.exports = class HashTable{
   }
 
   get(key){
-    //get hash
-    //check if bucket is empty
-    // return either the value or undefined
     let hash = this._generateHash(key);
     if(!this._buckets[hash])
-      return; //vinicio - return undefined;
+      return;
 
-    // vinicio - checkig if key is present wit existing hash
     let node = this._buckets[hash].find(key);
 
     if(node)
@@ -72,17 +50,13 @@ module.exports = class HashTable{
   }
 
   delete(key){
-    //get hash
-    //check if buckets is empty
-    //find node in linked list
-    //  remove from linked list if present
     let hash = this._generateHash(key);
 
     if(!this._buckets[hash])
       return false;
 
     let node = this._buckets[hash].find(key);
-    console.log(node);
+    
 
     if(node){
       this._buckets[hash] = this._buckets[hash].remove(key);
