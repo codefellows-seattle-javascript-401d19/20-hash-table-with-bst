@@ -37,8 +37,6 @@ class BinarySearchTree {
     if(value === this.value)
       return this;
 
-
-
     if(value > this.value) {
       if(this.right)
         return this.right.find(value);
