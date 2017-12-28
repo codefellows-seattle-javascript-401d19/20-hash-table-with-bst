@@ -10,11 +10,6 @@ describe('hash-table.js', () => {
       hashTable.set('city', 'olympia');
       expect(hashTable.set('song', 'rhiannon')).toBeTruthy();
     });
-
-    test('SET should throw an error if invalid input', () => {
-      expect(() => hashTable.set('', 'invalid')).toThrow();
-      expect(() => hashTable.set(666, 'invalid')).toThrow();
-    });
   });
 
   describe('GET method', () => {

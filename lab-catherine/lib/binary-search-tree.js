@@ -38,13 +38,12 @@ class BinarySearchTree {
   }
 
   insert(value) {
-    if(typeof value !== 'number')
-      throw new TypeError('Binary Search Tree - value should be a number');
 
     if(!this.root) {
       this.root = new Node(value);
+    } else {
+      this._insert(this.root, value);
     }
-    return this._insert(this.root, value);
   }
 
   _find(node, key) {
@@ -63,8 +62,6 @@ class BinarySearchTree {
   }
 
   find(key) {
-    if(typeof key !== 'number')
-      throw new TypeError('Binary Search Tree - key must be a number');
   
     return this._find(this.root, key);
   }

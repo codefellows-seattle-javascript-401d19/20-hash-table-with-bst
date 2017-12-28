@@ -9,9 +9,9 @@ class HashTable {
   }
 
   _hash(key) {
-    if(typeof key !== 'string')
+    if(typeof key !== 'string') {
       throw new TypeError('__HASHTABLE_ERROR__ key should be a string');
-      
+    } 
     let rawHash = 0;
 
     for(let i in key) {
@@ -26,7 +26,7 @@ class HashTable {
     if(!this._buckets[hash]) {
       let binarySearchTree = new BinarySearchTree();
       binarySearchTree.insert({key, hashTableValue});
-      binarySearchTree = this._buckets[hash];
+      this._buckets[hash] = binarySearchTree;
       return this;
     }
 
