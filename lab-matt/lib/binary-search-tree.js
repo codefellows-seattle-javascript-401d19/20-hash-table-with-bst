@@ -10,9 +10,6 @@ class BinarySearchTree {
   }
 
   insert(id, key, value) {
-    if (typeof id !== 'number') {
-      parseInt(id);
-    }
     if (this._id === id) {
       throw new Error('Binary Search Tree - \'key\' is already present');
     }

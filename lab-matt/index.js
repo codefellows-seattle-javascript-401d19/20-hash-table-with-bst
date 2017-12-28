@@ -11,7 +11,7 @@ hash.set('opsc', 'new eight');
 // hash.set('b', 'bee');
 // hash.set('d', 'dee');
 
-console.log(hash._buckets);
+// console.log(hash._buckets);
 // console.log(hash.get('opcs'));
 
 console.log(hash.remove('opsc'));
