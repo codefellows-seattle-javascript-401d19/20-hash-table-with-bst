@@ -25,8 +25,8 @@ describe('hash-table.js', () => {
 
   describe('REMOVE method', () => {
     test('REMOVE should remove the designated key', () => {
-      hashTable.set('city', 'olympia');
-      expect(hashTable.remove('city')).toBeNull();
+      hashTable.set('lab', 'difficult');
+      expect(hashTable.remove('lab')).toBeNull();
     });
 
     test('REMOVE should be undefined if key does not exist', () => {
