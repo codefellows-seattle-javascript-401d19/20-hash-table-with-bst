@@ -18,18 +18,18 @@ describe('testing binary-search-tree.js', () => {
     });
 
     test('testing that insert method will throw an error if value already exists', () => {
-      bst.insert({key: 'city', hashTableValue: 'olympia'});
-      expect(() => bst.insert({key: 'city', hashTableValue: 'olympia'})).toThrow();
+      bst.insert({key: 'coffee', hashTableValue: 'streetBean'});
+      expect(() => bst.insert({key: 'coffee', hashTableValue: 'streetBean'})).toThrow();
     });
   });
 
   describe('testing that find method functions properly', () => {
     test('testing that find method will return the requested value of the node', () => {
-      bst.insert({key: 'Asheville', hashTableValue: 'firstCity'});
-      bst.insert({key: 'Boston', hashTableValue: 'secondCity'});
-      bst.insert({key: 'Oakland', hashTableValue: 'thirdCity'});
-      expect(bst.find('Boston')).toBeTruthy();
-      expect(bst.find('Oakland').value.key).toEqual('Oakland');
+      bst.insert({key: 'ants', hashTableValue: 'small'});
+      bst.insert({key: 'dogs', hashTableValue: 'medium'});
+      bst.insert({key: 'zebras', hashTableValue: 'large'});
+      expect(bst.find('dogs')).toBeTruthy();
+      expect(bst.find('zebras').value.key).toEqual('zebras');
     });
 
     test('testing that find method will return null if value is not in bst', () => {
@@ -39,12 +39,11 @@ describe('testing binary-search-tree.js', () => {
 
   describe('testing that remove method functions properly', () => {
     test('testing that remove method will remove the node with the passed in value', () => {
-      bst.insert({key: 'Asheville', hashTableValue: 'firstCity'});
+      bst.insert({key: 'Atlanta', hashTableValue: 'firstCity'});
       bst.insert({key: 'Boston', hashTableValue: 'secondCity'});
       bst.insert({key: 'Oakland', hashTableValue: 'thirdCity'});
       bst.remove('Boston');
-      expect(bst.root.value.key).toEqual('Asheville');
-      expect(bst.root.right.value.key).toEqual('Oakland');
+      expect(bst.root.left.left.value.key).toEqual('Atlanta');
     });
 
     test('testing that remove  will return null if value is not found in bst', () => {
