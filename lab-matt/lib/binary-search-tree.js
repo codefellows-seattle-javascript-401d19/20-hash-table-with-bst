@@ -1,79 +1,81 @@
 'use strict';
 
 class BinarySearchTree {
-  constructor(value) {
+  constructor(id, key, value) {
+    this._id = id;
+    this.key = key;
     this.value = value;
     this.left = null;
     this.right = null;
   }
 
-  insert(value) {
-    if (typeof value !== 'number') {
-      throw new TypeError('Binary Search Tree - value should be a number');
+  insert(id, key, value) {
+    if (typeof id !== 'number') {
+      parseInt(id);
     }
-    if (this.value === value) {
-      throw new Error('Binary Search Tree - value is already present');
+    if (this._id === id) {
+      throw new Error('Binary Search Tree - \'key\' is already present');
     }
 
-    if (this.value > value) {
+    if (this._id > id) {
       if (this.left) {
-        this.left.insert(value);
+        this.left.insert(id);
         return;
       } else {
-        this.left = new BinarySearchTree(value);
+        this.left = new BinarySearchTree(id, key, value);
         return;
       }
     }
 
     if (this.right) {
-      this.right.insert(value);
+      this.right.insert(id);
       return;
     } else {
-      this.right = new BinarySearchTree(value);
+      this.right = new BinarySearchTree(id, key, value);
       return;
     }
   }
 
-  find(value) {
-    if (value === this.value) {
-      return true;
+  find(id) {
+    if (this._id === id) {
+      return this.value;
     }
 
-    if (this.value > value) {
+    if (this._id > id) {
       if (this.left) {
-        return this.left.find(value);
+        return this.left.find(id);
       } else {
-        return false;
+        return undefined;
       } 
     }
 
     if (this.right) {
-      return this.right.find(value);
+      return this.right.find(id);
     } else {
-      return false;
+      return undefined;
     }
   }
 
-  remove(value) {
-    let foundValue;
+  remove(id) {
+    let foundID;
     let parent;
     let current = this;
 
-    while (!foundValue && current !== null) {
-      if (current.value > value) {
+    while (!foundID && current !== null) {
+      if (current._id > id) {
         parent = current;
         current = current.left;
 
-      } else if (current.value < value) {
+      } else if (current._id < id) {
         parent = current;
         current = current.right;
 
       } else {
-        foundValue = value;
+        foundID = id;
       }
     }
 
-    if (foundValue) {
+    if (foundID) {
       if (current.left && current.right) {
         return this._removeWithTwoChildren(parent, current);
       }
@@ -83,13 +85,15 @@ class BinarySearchTree {
       }
 
     } else {
-      return 'No Node Found';
+      return 'No Key Found';
     }
   }
 
   _removeWithOneChildOrLess(parent, current) {
-    if (!parent) { // if the value is at the root
+    if (!parent) { // if the id is at the root
       if (current.right) {
+        current._id = current.right._id;
+        current.key = current.right.key;
         current.value = current.right.value;
         current.right = current.right.right;
         try {
@@ -97,9 +101,11 @@ class BinarySearchTree {
         } catch (e) {
           current.left = null;
         }
-        return;
+        return 'Removal Successful';
 
       } else if (current.left) {
+        current._id = current.left._id;
+        current.key = current.left.key;
         current.value = current.left.value;
         current.left = current.left.left;
         try {
@@ -107,18 +113,21 @@ class BinarySearchTree {
         } catch(e) {
           current.right = null;
         }
-        return;
+        return 'Removal Successful';
 
       } else {
-        this.value = null;
+        this._id = null;
       }
     }
 
     else {
-      if (parent.value > current.value) {
-        return parent.left = current.left;
+      if (parent._id > current._id) {
+        parent.left = current.left;
+        return 'Removal Successful';
+        
       } else {
-        return parent.right = current.right;
+        parent.right = current.right;
+        return 'Removal Successful';
       }
     }
   }
@@ -133,11 +142,18 @@ class BinarySearchTree {
     }
 
     if (!replacementParent) {
+      current._id = replacement._id;
+      current.key = replacement.key;
       current.value = replacement.value;
       current.left = replacement.left;
+      return 'Removal Successful';
+      
     } else {
+      current._id = replacement._id;
+      current.key = replacement.key;
       current.value = replacement.value;
       replacementParent.right = replacement.left;
+      return 'Removal Successful';
     }
   }
 }
