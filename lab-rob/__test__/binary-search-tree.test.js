@@ -31,22 +31,6 @@ describe('binary-search-tree.js', () => {
     fourth.left = fifth;
     fifth.left = sixth;
     sixth.right = seventh;
-
-    //                          b, 100 - rootNode
-    //                         /      \
-    //          leftOne - a, 80        c, 200 - first
-    //                                   \
-    //                                    k, 300 - second
-    //                                    /     \
-    //                      third - j, 250       l, 350 - secondRight
-    //                              /             \
-    //               fourth - i, 240               n, 370 - secondRightRight
-    //                         /                  / 
-    //           fifth - h, 230                 m, 360 - secondRightRightLeft 
-    //                      /   
-    //        sixth - f, 210    
-    //                       \
-    //                        g, 220 - seventh
   });
 
   describe('insert(key, value)', () => {
