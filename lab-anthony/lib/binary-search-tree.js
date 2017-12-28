@@ -32,7 +32,7 @@ class BinarySearchTree{
 
   find(predicate) {
     if (typeof predicate !== 'function') {
-      throw new TypeError('__LINKED_LIST_ERROR__ predicate should be a function');
+      throw new TypeError('__BINARY_TREE_ERROR__ predicate should be a function');
     }
     if (predicate(this) === true) {
       return this;
@@ -58,19 +58,19 @@ class BinarySearchTree{
     if(!node)
       return null;
 
-    if(node.value < this.value) {
+    if(node.value < this.value) { //go left until you find the node or it's larger than root.
       if(this.left)
         this.left = this.left.remove(node);
-    } else if(node.value > this.value) {
+    } else if(node.value > this.value) { //go right until you find the node or it's smaller than root.
       if(this.right)
         this.right = this.right.remove(node);
-    } else {
-      if(this.left === null && this.right === null)
+    } else { //found the node.
+      if(this.left === null && this.right === null)// if there are no children it's a leaf node.
         return null;
-      if(this.left === null) {
+      if(this.left === null) { // if it is a parent and it only has a right node.
         return this.right;
       }
-      else if(this.right === null) {
+      else if(this.right === null) { // if it is a parent with only a left child.
         return this.left;
       }
       let rightMinValue = this.right.findMin();
