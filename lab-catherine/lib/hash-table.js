@@ -24,7 +24,9 @@ class HashTable {
     let hash = this._hash(key);
 
     if(!this._buckets[hash]) {
-      this._buckets[hash] = new BinarySearchTree({key, hashTableValue});
+      let binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert({key, hashTableValue});
+      binarySearchTree = this._buckets[hash];
       return this;
     }
 
@@ -34,20 +36,23 @@ class HashTable {
       node.value.hashTableValue = hashTableValue;
       return this;
     }
-    this._buckets[hash].insert(key, hashTableValue);
+    this._buckets[hash].insert({key, hashTableValue});
     return this;
 
   }
 
   get(key) {
     let hash = this._hash(key);
-    if(!this._buckets[hash])
-      return;
 
-    let node = this._buckets[hash].find(node => node.value.key === key);
+    if(!this._buckets[hash])
+      return null;
+
+    let node = this._buckets[hash].find(key);
 
     if(node)
       return node.value.hashTableValue;
+    else 
+      return null;
   }
   
   remove(key) {
