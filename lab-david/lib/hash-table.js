@@ -56,9 +56,21 @@ class HashTable{
     if(node)
       return node.value.htValue;
     else  return undefined;
+  }
 
+  delete(key){
+    let hash = this._generateHash(key);
 
+    if(!this._buckets[hash])
+      return false;
 
+    let node = this._buckets[hash].find(node => node.value.key === key);
+
+    if(node){
+      this._buckets[hash] = this._buckets[hash].remove(node);
+      return true;
+    }
+    return false;
   }
 
 }
