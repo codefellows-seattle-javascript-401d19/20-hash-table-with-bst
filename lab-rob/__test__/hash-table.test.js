@@ -25,5 +25,16 @@ describe('hash-table.js', () => {
     });
   });
 
-  
+  describe('HashTable methods', () => {
+    let myHash = null;
+    beforeEach(() => {
+      myHash = new HashTable(20);
+    });
+
+    describe('.set(key, value) should add the key-value pair to the hash table.', () => {
+      test('should store an integer in the bucket no problem.', () => {
+        myHash.set('me', 123);
+      });
+    });
+  });
 });

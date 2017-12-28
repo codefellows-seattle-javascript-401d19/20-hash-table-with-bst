@@ -1,76 +1,77 @@
 'use strict';
 
 class BinarySearchTree {
-  constructor(value) {
+  constructor(key, value) {
+    this.key = key,
     this.value = value;
     this.left = null;
     this.right = null;
   }
 
-  insert(value) {
-    if(this.value === value)
-      throw new Error('<value> must be unique');
+  insert(key, value) {
+    if(this.key === key)
+      throw new Error('<key> must be unique');
 
-    if(typeof value !== 'number')
-      throw new TypeError('<value> must be a number');
+    if(typeof key !== 'string')
+      throw new TypeError('<key> must be a string');
     
-    if (value > this.value) {
+    if (key > this.key) {
       if(this.right === null) {
-        this.right = new BinarySearchTree(value);
+        this.right = new BinarySearchTree(key, value);
         return;
       }
 
-      this.right.insert(value);
+      this.right.insert(key, value);
       return;
     }
 
     if(this.left === null) {
-      this.left = new BinarySearchTree(value);
+      this.left = new BinarySearchTree(key, value);
       return;
     }
 
-    this.left.insert(value);
+    this.left.insert(key, value);
     return;
   }
 
-  find(value) {
-    if(typeof value !== 'number')
-      throw new TypeError('<value> must be a number');
+  find(key) {
+    if(typeof key !== 'string')
+      throw new TypeError('<key> must be a string');
 
-    if(this.value === value)
+    if(this.key === key)
       return this;
     
-    if(value > this.value) {
+    if(key > this.key) {
       if(this.right)
-        return this.right.find(value);
+        return this.right.find(key);
       return null;
     }
 
     if(this.left)
-      return this.left.find(value);
+      return this.left.find(key);
 
     return null;
   }
 
-  findParentOf(value) {
-    if (typeof value !== 'number')
-      throw new TypeError('<value> must be a number');
+  findParentOf(key) {
+    if (typeof key !== 'string')
+      throw new TypeError('<key> must be a string');
 
-    if(!this.find(value))
-      throw new Error(`<value> ${value} is not a child of calling node.`);
+    if(!this.find(key))
+      throw new Error(`<key> ${key} is not a child of calling node.`);
 
-    if (value === this.value)
+    if (key === this.key)
       return null; //calling node is the value we are looking for, so no relative parent node
 
     let keepSearching = true;
     let currentParent = this;
   
     while(keepSearching) {
-      if(currentParent.left && currentParent.left.value === value ||
-        currentParent.right && currentParent.right.value === value)
+      if(currentParent.left && currentParent.left.key === key ||
+        currentParent.right && currentParent.right.key === key)
         return currentParent;
 
-      if(value > currentParent.value)
+      if(key > currentParent.key)
         currentParent = currentParent.right;
       else
         currentParent = currentParent.left;
