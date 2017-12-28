@@ -37,7 +37,7 @@ Compute the hash for a given key. Used internally.
 
 #### `.set(key, value)`
 
-Store a key-value pair in the hash table. Hashes the key and stores it in the given bucket.
+Store a key-value pair in the hash table. Hashes the key and stores it in the given bucket. Key-Value pairs are stored in a BinarySearchTree. When there is a collision, the k-v pair gets inserted into the appropriate spot in that bucket's BST. If the key already exists in the hash map, the value is updated. If the key is not a string, an error is thrown.
 
 ```
 myHash.set('puppies', 128);
@@ -45,7 +45,7 @@ myHash.set('puppies', 128);
 
 #### `.get(key)`
 
-get the value associated with the given key.
+get the value associated with the given key. If there is no node with the given key in the bucket, null is returned. If the key is not a string, an error is thrown.
 
 ```
 myHash.get('puppies');
