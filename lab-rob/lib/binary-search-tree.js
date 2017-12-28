@@ -91,6 +91,7 @@ class BinarySearchTree {
     // Case 1: root has no children
     if(this.left === null && this.right === null) {
       this.value = null;
+      this.key = null;
       return null;
     }
 
@@ -98,10 +99,13 @@ class BinarySearchTree {
     if(this.left && !this.right || this.right && !this.left) {
       if(this.left) {
         this.value = this.left.value;
+        this.key = this.left.key;
+
         this.right = this.left.right;
         this.left = this.left.left;
       } else {
         this.value = this.right.value;
+        this.key = this.right.key;
         this.left = this.right.left;
         this.right = this.right.right;
       }
@@ -110,38 +114,41 @@ class BinarySearchTree {
 
     // Case 3: root has two children
     let successor = this.right.getLefty();
-    let successorParent = this.findParentOf(successor.value);
-    if(successorParent.value !== this.value) {
+    let successorParent = this.findParentOf(successor.key);
+    if(successorParent.key !== this.key) {
       successorParent.left = successor.right;
       this.value = successor.value;
+      this.key = successor.key;
+
       this.right = successorParent;
     } else {
       this.value = successor.value;
+      this.key = successor.key;
       this.right = successor.right;
     }
 
     return this;
   }
 
-  remove(value) {
-    if(typeof value !== 'number')
-      throw new TypeError('<value> must be a number');
+  remove(key) {
+    if(typeof key !== 'string')
+      throw new TypeError('<key> must be a string');
 
-    if(this.value === value)
+    if(this.key === key)
       return this._removeRoot();
 
-    let valueNode = this.find(value);
+    let keyNode = this.find(key);
 
-    // Case 1: value is not in tree - return null
-    if(valueNode === null) {
+    // Case 1: key is not in tree - return null
+    if(keyNode === null) {
       return null;
     }
 
-    let parent = this.findParentOf(value);
+    let parent = this.findParentOf(key);
 
-    // Case 2: value is a leaf - remove connection from parent
-    if(valueNode.left === null && valueNode.right === null) {
-      if(parent.left && parent.left.value === value) {
+    // Case 2: key is a leaf - remove connection from parent
+    if(keyNode.left === null && keyNode.right === null) {
+      if(parent.left && parent.left.key === key) {
         parent.left = null;
         return this;
       }
@@ -150,11 +157,11 @@ class BinarySearchTree {
       return this;
     }
 
-    // Case 3: value has one child - connect its parent to its child
-    if(valueNode.left && !valueNode.right || valueNode.right && !valueNode.left) {
-      let child = valueNode.left || valueNode.right;
+    // Case 3: key has one child - connect its parent to its child
+    if(keyNode.left && !keyNode.right || keyNode.right && !keyNode.left) {
+      let child = keyNode.left || keyNode.right;
 
-      if(parent.left && parent.left.value === value)
+      if(parent.left && parent.left.key === key)
         parent.left = child;
       else
         parent.right = child;
@@ -162,12 +169,12 @@ class BinarySearchTree {
       return this;
     }
 
-    // Case 4: value has two children, reconnect the things!
-    let successor = valueNode.right.getLefty();
-    let successorParent = this.findParentOf(successor.value);
-    successor.left = valueNode.left;
+    // Case 4: key has two children, reconnect the things!
+    let successor = keyNode.right.getLefty();
+    let successorParent = this.findParentOf(successor.key);
+    successor.left = keyNode.left;
     successorParent.left = null;
-    if(parent.right && parent.right.value === value)
+    if(parent.right && parent.right.key === key)
       parent.right = successor;
     else
       parent.left = successor;
