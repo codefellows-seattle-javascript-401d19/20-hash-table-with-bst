@@ -38,7 +38,7 @@ class HashTable {
     let bstID = this._getBstID(key);
 
     if (!this._buckets[hashIndex]) {
-      return 'No Bucket Found';
+      return null;
     }
 
     let node = this._buckets[hashIndex];

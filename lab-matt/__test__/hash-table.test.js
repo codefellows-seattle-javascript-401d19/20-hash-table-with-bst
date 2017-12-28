@@ -108,14 +108,14 @@ describe('hash-table', () => {
       
     });
 
-    test('should return with either no bucket found, or no key found if the key-value pair doesn\'t exists', () => {
-      expect(table.remove('ayy')).toEqual('No Key Found');
-      expect(table.remove('bee')).toEqual('No Key Found');
-      expect(table.remove('see')).toEqual('No Key Found');
+    test('should return with null if the key-value pair doesn\'t exists', () => {
+      expect(table.remove('ayy')).toEqual(null);
+      expect(table.remove('bee')).toEqual(null);
+      expect(table.remove('see')).toEqual(null);
       let table2 = new HashTable();
-      expect(table2.remove('d')).toEqual('No Bucket Found');
-      expect(table2.remove('e')).toEqual('No Bucket Found');
-      expect(table2.remove('f')).toEqual('No Bucket Found');
+      expect(table2.remove('d')).toEqual(null);
+      expect(table2.remove('e')).toEqual(null);
+      expect(table2.remove('f')).toEqual(null);
     });
   });
 });

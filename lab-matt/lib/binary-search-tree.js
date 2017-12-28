@@ -82,7 +82,7 @@ class BinarySearchTree {
       }
 
     } else {
-      return 'No Key Found';
+      return null;
     }
   }
 
