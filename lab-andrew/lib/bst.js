@@ -39,7 +39,7 @@ class BST {
       throw new TypeError('key must be a number');
     }
     if (!this.root){
-      this.root = new BSTNode(key);
+      this.root = new BSTNode(key, value);
     }
     return this._insert(this.root, key, value);
   }

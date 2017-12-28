@@ -25,7 +25,7 @@ class HashTable {
   _treeHash(key){
     const keyArr = key.split('');
     return keyArr.reduce((acc, val, index) => {
-      return acc + (val.charCodeAt() * (index + 1));
+      return acc + (val.charCodeAt() * (keyArr.length - index));
     }, 0);
   }
 
