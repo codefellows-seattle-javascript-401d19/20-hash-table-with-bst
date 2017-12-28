@@ -9,11 +9,10 @@ module.exports = class HashTable{
     this._capacity = capacity;
     this._buckets = new Array(capacity);
   }
-  
-  // _hash method that computes a keys hash
-  _hash(key){
+
+  _generateHash(key){
     if(typeof key !== 'string')
-      throw new TypeError('__HASHTABLE_ERROR__ key is NOT a string');
+      throw new TypeError('__HASTABLE_ERROR_ key should be a string');
     let rawHash = 0;
     
     for(let i in key){
@@ -23,57 +22,54 @@ module.exports = class HashTable{
     return rawHash % this._capacity;
   }
 
-  // set method that stores a key value pair
-  set(key,htValue){
-    let hash = this._hash(key);
-
+  set(key, htValue){
+    let hash = this._generateHash(key);
     if(!this._buckets[hash]){
-      this._buckets[hash] = new BinarySearchTree({key,htValue});
+      let BST = new BinarySearchTree();
+      BST.add({key, htValue});
+      this._buckets[hash] = BST;
       return this;
     }
 
-    let node = this._buckets[hash].find(key);
-
+    let node = this._buckets[hash].contains(key);
+ 
     if(node){
       node.value.htValue = htValue;
       return this;
     }
-
-    this._buckets[hash].insert({key,htValue});
+    this._buckets[hash].add({key, htValue});
     return this;
   }
 
-  // get method that retrieves a a value for a given key
   get(key){
-    let hash = this._hash(key);
+    let hash = this._generateHash(key);
 
-    if(!this._buckets[hash])
-      return;
-    
-    let node = this._buckets[hash].find(key);
-    console.log(node);
+    if(!this._buckets[hash]){
+      return null;
+    }
+
+    let node = this._buckets[hash].contains(key);
 
     if(node)
       return node.value.htValue;
   }
-
+  
 
   // remove method that remvoves a key value pair from the HashTable
   delete(key){
-    let hash = this._hash(key);
+    let hash = this._generateHash(key);
 
     if(!this._buckets[hash])
-      return false;
+      return undefined;
     
-    let node = this._buckets[hash].find(node => node.value.key === key);
-    console.log(node);
+    let node = this._buckets[hash].contains(key);
 
     if(node){
-      this._buckets[hash] = this._buckets[hash].remove(node.value);
+      this._buckets[hash] = this._buckets[hash].remove(key);
       return true;
     }
 
-    // return false;
+    return false;
   }
 
 };
