@@ -49,6 +49,26 @@ class HashTable {
 
     return foundNode ? foundNode.value : null;
   }
+
+  remove(key) {
+    let hash = this._hash(key);
+
+    if(!this._buckets[hash])
+      return null;
+
+    let rootNode = this._buckets[hash];
+    let node = rootNode.find(key);
+
+    if(!node)
+      return null;
+
+    let value = node.value;
+    rootNode.remove(key);
+    if(!rootNode.key)
+      this._buckets[hash] = null;
+
+    return value;
+  }
 }
 
 module.exports = HashTable;

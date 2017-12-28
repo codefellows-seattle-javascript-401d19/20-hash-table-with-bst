@@ -50,6 +50,9 @@ get the value associated with the given key. If there is no node with the given 
 ```
 myHash.get('puppies');
 // returns 128
+
+myHash.get('wuh-oh!');
+// returns null
 ```
 
 #### `.remove(key)`

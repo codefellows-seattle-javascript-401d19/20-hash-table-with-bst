@@ -103,6 +103,39 @@ describe('hash-table.js', () => {
       });
     });
 
-    
+    describe('remove(key)', () => {
+      beforeEach(() => {
+        myHash = new HashTable(5);
+        myHash.set('a', 1);
+        myHash.set('b', 2);
+        myHash.set('c', 3);
+        myHash.set('e', 5);
+        myHash.set('g', 6);
+      });
+
+      test('should return the removed value, remove the k-v pair from the hash table if there is no collision, and remove the BST from the bucket.', () => {
+        expect(myHash.remove('a')).toEqual(1);
+        expect(myHash._buckets[myHash._hash('a')]).toBeNull();
+      });
+
+      test('should return the removed value, remove the k-v pair from the binary tree, but leave the BST in the bucket if there are other nodes in the tree (remove leaf).', () => {
+        expect(myHash.remove('b')).toEqual(2);
+        expect(myHash._buckets[myHash._hash('b')]).toEqual({key: 'g', value: 6, left: null, right: null});
+      });
+
+      test('should return the removed value, remove the k-v pair from the binary tree, but leave the BST in the bucket if there are other nodes in the tree (remove root).', () => {
+        expect(myHash.remove('g')).toEqual(6);
+        expect(myHash._buckets[myHash._hash('g')]).toEqual({key: 'b', value: 2, left: null, right: null});
+      });
+
+      test('should return null if key maps to an empty bucket.', () => {
+        expect(myHash.remove('d')).toBeNull();
+      });
+
+      test('should return null if requested key is not found in a nonempty bucket.', () => {
+        myHash.set('d', 4);
+        expect(myHash.remove('z')).toBeNull();
+      });
+    });
   });
 });
