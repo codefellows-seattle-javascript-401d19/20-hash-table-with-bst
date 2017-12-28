@@ -1,8 +1,8 @@
 'use strict';
 
-const LinkedList = require('./linked-list.js');
+const BinarySearchTree = require('./binary-search-tree');
 
-module.exports = class HashTable {
+class HashTable {
   constructor(capacity = 1024) {
     this._capacity = capacity;
     this._buckets = new Array(capacity);
@@ -11,6 +11,7 @@ module.exports = class HashTable {
   _hash(key) {
     if(typeof key !== 'string')
       throw new TypeError('__HASHTABLE_ERROR__ key should be a string');
+      
     let rawHash = 0;
 
     for(let i in key) {
@@ -20,10 +21,10 @@ module.exports = class HashTable {
   }
 
   set(key, hashTableValue) {
-    let hash = this._generateHash(key);
+    let hash = this._hash(key);
 
     if(!this._buckets[hash]) {
-      this._buckets[hash] = new LinkedList({key, hashTableValue});
+      this._buckets[hash] = new BinarySearchTree({key, hashTableValue});
       return this;
     }
 
@@ -33,35 +34,39 @@ module.exports = class HashTable {
       node.value.hashTableValue = hashTableValue;
       return this;
     }
-    this._buckets[hash].append(new LinkedList({key, hashTableValue}));
+    this._buckets[hash].insert(key, hashTableValue);
     return this;
 
   }
 
   get(key) {
-    let hash = this._generateHash(key);
+    let hash = this._hash(key);
     if(!this._buckets[hash])
       return;
 
     let node = this._buckets[hash].find(node => node.value.key === key);
 
     if(node)
-
       return node.value.hashTableValue;
   }
   
   remove(key) {
-    let hash = this._generateHash(key);
+    let hash = this._hash(key);
 
     if(!this._buckets[hash])
-      return false;
+      return undefined;
 
-    let node = this._buckets[hash].find(node => node.value.key === key);
+    let node = this._buckets[hash].find(key);
 
-    if(node) {
-      this._buckets[hash] = this._buckets[hash].remove(node);
-      return true;
+    if(!node) {
+      return undefined;
     }
-    return false;
+
+    this._buckets[hash] = this._buckets[hash].remove(node.value.key);
+    return this._buckets[hash];
   }
-};
+    
+}
+
+
+module.exports = HashTable;
