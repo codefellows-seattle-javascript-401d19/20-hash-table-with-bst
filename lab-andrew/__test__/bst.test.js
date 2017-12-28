@@ -1,9 +1,9 @@
 'use strict';
 
-const tree = require('../lib/bst');
+const BST = require('../lib/bst');
 
 describe('tests for bst.js', () => {
-  let testTree = new tree.BST();
+  let testTree = new BST();
   testTree.insert(10);
   testTree.insert(15);
   testTree.insert(5);
@@ -13,10 +13,10 @@ describe('tests for bst.js', () => {
   describe('testing insert function', () => {
 
     test('insert function should return expected values when used properly', () => {
-      expect(testTree.root.right.value).toEqual(15);
-      expect(testTree.root.left.value).toEqual(5);
-      expect(testTree.root.left.left.value).toEqual(3);
-      expect(testTree.root.right.left.value).toEqual(13);
+      expect(testTree.root.right.key).toEqual(15);
+      expect(testTree.root.left.key).toEqual(5);
+      expect(testTree.root.left.left.key).toEqual(3);
+      expect(testTree.root.right.left.key).toEqual(13);
     });
 
     test('insert function should correctly handle invalid input', () => {
@@ -37,9 +37,9 @@ describe('tests for bst.js', () => {
       expect(testTree.find(3)).toEqual(testTree.root.left.left);
     });
 
-    test('find should return negative 1 if number does not exist in tree', () => {
-      expect(testTree.find(11)).toEqual(-1);
-      expect(testTree.find(2)).toEqual(-1);
+    test('find should return undefined if number does not exist in tree', () => {
+      expect(testTree.find(11)).toBeUndefined();
+      expect(testTree.find(2)).toBeUndefined();
     });
   });
 
@@ -49,19 +49,19 @@ describe('tests for bst.js', () => {
       expect(() => testTree.remove(false)).toThrow();
     });
 
-    test('remove should return negative 1 if node with value does not exist', () => {
+    test('remove should return negative 1 if node with key does not exist', () => {
       expect(testTree.remove(999)).toEqual(-1);
 
     });
     test('remove should be able to remove a leaf', () => {
       testTree.remove(3);
-      expect(testTree.find(3)).toEqual(-1);
+      expect(testTree.find(3)).toBeUndefined();
     });
     
     test('remove should be able to remove a node with one child', () => {
       testTree.remove(15);
-      expect(testTree.find(15)).toEqual(-1);
-      expect(testTree.root.right.value).toEqual(13);
+      expect(testTree.find(15)).toBeUndefined();
+      expect(testTree.root.right.key).toEqual(13);
 
     });
 
@@ -69,10 +69,10 @@ describe('tests for bst.js', () => {
       testTree.insert(8);
       testTree.insert(2);
       testTree.remove(5);
-      expect(testTree.find(5)).toEqual(-1);
-      expect(testTree.root.left.value).toEqual(8);
+      expect(testTree.find(5)).toBeUndefined();
+      expect(testTree.root.left.key).toEqual(8);
       expect(testTree.root.left.right).toBeNull();
-      expect(testTree.root.left.left.value).toEqual(2);
+      expect(testTree.root.left.left.key).toEqual(2);
 
     });
 
@@ -82,7 +82,7 @@ describe('tests for bst.js', () => {
       testTree.insert(17);
       testTree.insert(16);
       testTree.remove(15);
-      expect(testTree.root.right.right.value).toEqual(16);
+      expect(testTree.root.right.right.key).toEqual(16);
       testTree.remove(14);
       testTree.remove(16);
       testTree.remove(17);
@@ -90,15 +90,15 @@ describe('tests for bst.js', () => {
 
     test('remove should be able to remove test, with 2, 1 and 0 children', () => {
       testTree.remove(10);
-      expect(testTree.root.value).toEqual(13);
+      expect(testTree.root.key).toEqual(13);
       testTree.remove(13);
-      expect(testTree.root.value).toEqual(8);
+      expect(testTree.root.key).toEqual(8);
       testTree.remove(8);
       testTree.remove(2);
       expect(testTree.root).toBeNull();
       testTree.insert(11);
       testTree.remove(10);
-      expect(testTree.root.value).toEqual(11);
+      expect(testTree.root.key).toEqual(11);
     });
 
     test('remove should account for removing nodes in all scenarios', () => {
@@ -106,16 +106,16 @@ describe('tests for bst.js', () => {
       testTree.insert(4);
       testTree.insert(5);
       testTree.remove(6);
-      expect(testTree.root.left.value).toEqual(4);
+      expect(testTree.root.left.key).toEqual(4);
       testTree.remove(4);
-      expect(testTree.root.left.value).toEqual(5);
+      expect(testTree.root.left.key).toEqual(5);
       testTree.remove(5);
       testTree.remove(11);
       expect(testTree.root).toBeNull();
       testTree.insert(5);
       testTree.insert(10);
       testTree.remove(5);
-      expect(testTree.root.value).toEqual(10);
+      expect(testTree.root.key).toEqual(10);
     });
   });
 
