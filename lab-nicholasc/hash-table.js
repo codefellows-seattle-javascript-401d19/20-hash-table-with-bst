@@ -6,7 +6,7 @@ const LinkedList = require('./linked-list');
 class HashTable{
   constructor(capacity=1024){
     this._capacity = capacity;
-    this._buckets = new Array(capacity);
+    this._buckets = new Array(capacity); 
   }
 
   _generateHash(key) {//TODO: remove this NOTE: this function is prone to collisions/isnt suited for production
