@@ -1,0 +1,14 @@
+{
+  "name": "lab-20-reed",
+  "version": "1.0.0",
+  "description": "Code Fellows 401d19 Lab 20 Binary Search Tree and Hash Table",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest -i --coverage"
+  },
+  "author": "Robert Reed",
+  "license": "MIT"
+}
