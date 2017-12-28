@@ -1,0 +1,19 @@
+{
+  "name": "lab-shannon",
+  "version": "1.0.0",
+  "description": "hash table using BST",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest -i --coverage",
+    "lint": "eslint ./"
+  },
+  "author": "shannon",
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^4.14.0",
+    "jest": "^22.0.4"
+  }
+}
