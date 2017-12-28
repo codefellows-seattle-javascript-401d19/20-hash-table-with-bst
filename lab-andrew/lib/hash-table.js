@@ -4,6 +4,9 @@ const BST = require('./bst');
 
 class HashTable {
   constructor(capacity = 1024){
+    if (typeof capacity !== 'number'){
+      throw new TypeError('_ERROR_ capacity must be a number');
+    }
     this._capacity = capacity;
     this._buckets = new Array(capacity);
   }

@@ -5,6 +5,11 @@ const HashTable = require('../lib/hash-table');
 describe('tests for hash-table.js', () => {
   const table = new HashTable();
 
+  test('new table will throw if argument passed is not a number', () => {
+    expect(() => new HashTable('oops')).toThrow();
+    expect(() => new HashTable(false)).toThrow();
+  });
+  
   describe('tests for set method', () => {
 
     test('hash table should be able to set valid key-value pairs', () => {
@@ -24,8 +29,8 @@ describe('tests for hash-table.js', () => {
 
     test('hash table should store collisions in a BST', () => {
       table.set('arddess', 777);
-      expect(table._buckets[table._hash('address')].root.right.value).toEqual(777);
       table.set('aeddrss', 999);
+      expect(table._buckets[table._hash('address')].root.right.value).toEqual(777);
       expect(table._buckets[table._hash('address')].root.left.value).toEqual(999);
     });
 
