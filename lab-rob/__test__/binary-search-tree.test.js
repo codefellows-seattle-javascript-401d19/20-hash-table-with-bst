@@ -49,6 +49,52 @@ describe('binary-search-tree.js', () => {
     //                        g, 220 - seventh
   });
 
+  describe('insert(key, value)', () => {
+    test('should insert the node to the left if the key is smaller the current key, or to the right if greater.', () => {
+      let newRoot = new BinarySearchTree('b', 100);
+      newRoot.insert('a', 80);
+      newRoot.insert('c', 200);
+      newRoot.insert('k', 300);
+      newRoot.insert('j', 250);
+      newRoot.insert('i', 240);
+      newRoot.insert('h', 230);
+      newRoot.insert('f', 210);
+      newRoot.insert('g', 220);
+      newRoot.insert('l', 350);
+      newRoot.insert('n', 370);
+      newRoot.insert('m', 360);
+      expect(newRoot).toEqual(rootNode);
+    });
+
+    test('should throw an error if a non-unique key is inserted', () => {
+      expect(() => {
+        rootNode.insert('a', 1230);
+      }).toThrow();
+    });
+
+    test('should throw an error if a non-string is used for the key', () => {
+      expect(() => {
+        rootNode.insert(1203,1230);
+      }).toThrow();
+    });
+  });
+
+  describe('find(key)', () => {
+    test('should return the node with the given key', () => {
+      expect(rootNode.find('j')).toEqual(third);
+    });
+
+    test('should throw an error if a non-string is used as key', () => {
+      expect(() => {
+        rootNode.find(1234);
+      }).toThrow();
+    });
+
+    test('should return null a key is not in BST', () => {
+      expect(rootNode.find('z')).toBeNull();
+    });
+  });
+
   describe('findParentOf(value)', () => {
     test('should return the parent node with a child containing the selected value.', () => {
       expect(rootNode.findParentOf('k')).toEqual(first);
