@@ -84,7 +84,7 @@ describe('hash-table', () => {
   });
 
   describe('.remove(key)', () => {
-    test.only('should remove the key value pair relative to the given key', () => {
+    test('should remove the key value pair relative to the given key', () => {
 
       table.remove('d');
       expect(table._buckets[0].value).toEqual(2);
@@ -108,26 +108,14 @@ describe('hash-table', () => {
       
     });
 
-    test('should return undefined if no key value pair is stored with the given key', () => {
-      expect(table.get('ayy')).toEqual(undefined);
-      expect(table.get('bee')).toEqual(undefined);
-      expect(table.get('see')).toEqual(undefined);
+    test('should return with either no bucket found, or no key found if the key-value pair doesn\'t exists', () => {
+      expect(table.remove('ayy')).toEqual('No Key Found');
+      expect(table.remove('bee')).toEqual('No Key Found');
+      expect(table.remove('see')).toEqual('No Key Found');
       let table2 = new HashTable();
-      expect(table2.get('d')).toEqual(undefined);
-      expect(table2.get('e')).toEqual(undefined);
-      expect(table2.get('f')).toEqual(undefined);
-    });
-
-    test('should throw an error the key is not a string', () => {
-      expect(() => {
-        table.get(5, 3);
-      }).toThrow();
-      expect(() => {
-        table.get([2, 3], 4);
-      }).toThrow();
-      expect(() => {
-        table.get({'e': 5}, 5);
-      }).toThrow();
+      expect(table2.remove('d')).toEqual('No Bucket Found');
+      expect(table2.remove('e')).toEqual('No Bucket Found');
+      expect(table2.remove('f')).toEqual('No Bucket Found');
     });
   });
 });

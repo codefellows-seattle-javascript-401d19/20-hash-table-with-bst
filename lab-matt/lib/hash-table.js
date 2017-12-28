@@ -42,12 +42,7 @@ class HashTable {
     }
 
     let node = this._buckets[hashIndex];
-
-    if (node) {
-      return node.remove(bstID);
-    }
-
-    return 'No Key Found';
+    return node.remove(bstID);
   }
 
   // ================= _Helpers =================

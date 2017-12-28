@@ -16,7 +16,7 @@ class BinarySearchTree {
 
     if (this._id > id) {
       if (this.left) {
-        this.left.insert(id);
+        this.left.insert(id, key, value);
         return;
       } else {
         this.left = new BinarySearchTree(id, key, value);
@@ -25,7 +25,7 @@ class BinarySearchTree {
     }
 
     if (this.right) {
-      this.right.insert(id);
+      this.right.insert(id, key, value);
       return;
     } else {
       this.right = new BinarySearchTree(id, key, value);
@@ -68,7 +68,7 @@ class BinarySearchTree {
         current = current.right;
 
       } else {
-        foundID = id;
+        foundID = current._id;
       }
     }
 
@@ -87,43 +87,40 @@ class BinarySearchTree {
   }
 
   _removeWithOneChildOrLess(parent, current) {
+    let leftNode = current.left;
+    let rightNode = current.right;
+    
     if (!parent) { // if the id is at the root
       if (current.right) {
         current._id = current.right._id;
         current.key = current.right.key;
-        current.value = current.right.value;
-        current.right = current.right.right;
-        try {
-          current.left = current.right.left;
-        } catch (e) {
-          current.left = null;
-        }
+        current.value = rightNode.value;
+        current.right = rightNode.right;
+        current.left = rightNode.left;
         return 'Removal Successful';
 
       } else if (current.left) {
         current._id = current.left._id;
         current.key = current.left.key;
-        current.value = current.left.value;
-        current.left = current.left.left;
-        try {
-          current.right = current.left.right;
-        } catch(e) {
-          current.right = null;
-        }
+        current.value = leftNode.value;
+        current.left = leftNode.left;
+        current.right = leftNode.right;
         return 'Removal Successful';
 
       } else {
         this._id = null;
+        this.key = null;
+        this.value = null;
       }
     }
 
     else {
       if (parent._id > current._id) {
-        parent.left = current.left;
+        parent.left = current.right;
         return 'Removal Successful';
         
       } else {
-        parent.right = current.right;
+        parent.right = current.left;
         return 'Removal Successful';
       }
     }
