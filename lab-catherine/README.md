@@ -7,36 +7,35 @@
 
 ### Motivation
 
-In this project, I built a Binary Search Tree with four methods: An `insert` method, a `find` method, a `findMinValue` method, and a `remove` method. 
+In this project, I built a Binary Search Tree with a Node class, a Binary Search Tree class, and three external methods: An `insert` method, a `find` method and a `remove` method. 
 
-In this project, I also built a K-ary-Tree with a constructor function and the following prototype methods: `KAryTree.prototype.appendChild`, `KAryTree.prototype.breadthFirstSearch`, `KAryTree.prototype.breadthFirstToString`, and `KAryTree.prototype.depthFirstToArray`. 
+In this project, I also built a Hash Table class with a constructor function and the following prototype methods: `_hash`, `set`, `get`, and `remove`.
 
 ### Build
 
-#### K Ary Tree
+#### Hash Table
 
-##### `KAryTree.prototype.appendChild`
+##### `_hash` method
 
-This method inserts nodes into the K Ary Tree. It can be called on any node in the tree, as long as the node passed in is an instance of the KAryTree. The Big(O) of time and space should both be constant.
+This method expects a parameter of key that must be a string. This method takes the key and hashes it. This is a helper function that is used in the other methods.
 
-##### `KAryTree.prototype.breadthFirstSearch`
+##### `set` method
 
-This method should be called on the root node and will traverse the KAryTree breadth first and will return the node that matches the passed in value or will return null if the value is not found. This will be O(n) for time where n is the size of the tree, and will be constant for space.
+This method expects two parameters: key and hashTableValue. The method first hashes the key, then determines whether the bucket already contains a key, if not it stores the key:value pair there. If the key already exists, then it will be updated with the new value.
 
-##### `KAryTree.prototype.breadthFirstToString` 
+##### `get` method
 
-This method should be called on the root node and will traverse the KAryTree breadth first and will return the values in the tree in a string separated by new lines. This is Big O(n) for time complexity since it traverses the tree once. This is Big O(n) for space where n is the length of the string.
+This method expects a parameter of key. This method first hashes the key. If the key exists, then the function will find the key and return key.value.hashTableValue. If it does not exist, then null will be returned.
 
-##### `KAryTree.prototype.depthFirstToArray`
+##### `remove` method
 
-This method should be called on the root node and will traverse the KAryTree depth first and will return the new array with all of the node values. This function also traverses the tree once so its time complexity is O(n). This is Big O(n) for space where n is the length of the array.
-
+This method expects a parameter of key. This method first hashes the key. If the key exists, then the remove function will be called and will remove the stored key:value pair. If the key is not found, then undefined will be returned.
 
 #### Binary Search Tree
 
 ##### `insert`
 
-This method accepts a value to be inserted into the Binary Search Tree. The value must be a number. The method follows the proper set up of a BST where values larger than the root value will be inserted to the right, and values smaller than the root value will be inserted to the left. Big O of time is O(h) where h is the height of the tree. Big O of Space is constant.
+This method accepts a value to be inserted into the Binary Search Tree. The method follows the proper set up of a BST where values larger than the root value will be inserted to the right, and values smaller than the root value will be inserted to the left. Big O of time is O(h) where h is the height of the tree. Big O of Space is constant.
 
 
 ##### `find`
