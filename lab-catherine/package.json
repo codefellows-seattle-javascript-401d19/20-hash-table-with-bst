@@ -1,0 +1,34 @@
+{
+  "name": "lab-catherine",
+  "version": "1.0.0",
+  "description": "Code 401 Lab 20 Binary Search Tree and Hash Table",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest -i --coverage",
+    "lint": "estlint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccloops/20-hash-table-with-bst.git"
+  },
+  "keywords": [
+    "binary",
+    "search",
+    "tree",
+    "hash",
+    "table"
+  ],
+  "author": "Catherine Looper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ccloops/20-hash-table-with-bst/issues"
+  },
+  "homepage": "https://github.com/ccloops/20-hash-table-with-bst#readme",
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "jest": "^22.0.4"
+  }
+}
