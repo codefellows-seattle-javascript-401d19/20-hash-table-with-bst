@@ -1,0 +1,27 @@
+{
+  "name": "20-hash-table-with-bst",
+  "version": "1.0.0",
+  "description": "Hash Tables and BST",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest -i --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kerrynordstrom/20-hash-table-with-bst.git"
+  },
+  "keywords": [
+    "Hash-Tables",
+    "BST"
+  ],
+  "author": "Kerry Nordstrom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kerrynordstrom/20-hash-table-with-bst/issues"
+  },
+  "homepage": "https://github.com/kerrynordstrom/20-hash-table-with-bst#readme",
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "jest": "^22.0.4"
+  }
+}
