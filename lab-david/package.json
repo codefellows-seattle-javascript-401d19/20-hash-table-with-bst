@@ -1,0 +1,12 @@
+{
+  "name": "lab-david",
+  "version": "1.0.0",
+  "description": "This is a RESTful HTTP server with basic authentication using express.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
