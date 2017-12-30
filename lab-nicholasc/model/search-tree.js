@@ -106,11 +106,10 @@ class BinarySearchTree{
 
   _remove(node, key){
     node = this.find(key);
-    // console.log(n);
     if(!node){
       return null;
     }
-    //when removing the root node also reassign the key
+
     if(node.left && node.right){
       let min = this._findMin(node.right);
       this.remove(min.key);
@@ -144,13 +143,5 @@ class BinarySearchTree{
   }
 
 }
-
-// class BSTNODE{
-//   constructor(value){
-//     this.value = value;
-//     this.left = null;
-//     this.right = null;
-//   }
-// }
 
 module.exports = BinarySearchTree;
