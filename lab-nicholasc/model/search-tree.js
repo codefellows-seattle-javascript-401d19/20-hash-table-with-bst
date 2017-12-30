@@ -1,67 +1,94 @@
 'use strict';
 
-class BinarySearchTree{
-  constructor(value){
+class Node{
+  constructor(key, value){
+    this.key = key;
     this.value = value;
     this.left = null;
     this.right = null;
   }
-  insert(value){
-    if(typeof value !== 'number')
-      throw new TypeError('Binary Search Tree - value should be a number');
-    if(this.value === value)
-      throw new TypeError('Binary Search Tree - value is already present');
+}
 
-    if(value < this.value){
-      if(!this.left)
-        return this.left = new BinarySearchTree(value);
-      return this.left.insert(value);
-    }
-    if(!this.right)
-      return this.right = new BinarySearchTree(value);
-    return this.right.insert(value);
+
+class BinarySearchTree{
+  constructor(){
+    this.root = null;
   }
-  find(value){
-    if(value=== this.value)
-      return this;
 
-    if(value > this.value) {
-      if(this.right !==null)
-        return this.right.find(value);
+  insert(key, value){
+    let nodeToInsert = new Node(key, value);
+    if(!this.root)
+      return this.root = nodeToInsert;
+    return this._insert(this.root, nodeToInsert, key);
+  }
+
+  _insert(node, nodeToInsert, key){
+    if(key < node.key){
+      if(!node.left)
+        return node.left = nodeToInsert;
+      return this._insert(node.left, nodeToInsert, key);
+    }
+    if(!node.right)
+      return node.right = nodeToInsert;
+    return this._insert(node.right, nodeToInsert, key);
+  }
+
+  find(value){
+    return this._find(this.root, value);
+  }
+
+  _find(node, value){
+    if(value=== node.value)
+      return node;
+
+    if(value > node.value) {
+      if(node.right !==null)
+        return this._find(node.right, value);
       else
         return false;
     }
-    if(this.left!== null)
-      return this.left.find(value);
+    if(node.left!== null)
+      return this._find(node.left, value);
     else
       return false;
   }
 
   findParent(value){
-    if(this.left)
-      if(this.left.value === value)
-        return this;
-    if(this.right)
-      if(this.right.value === value)
-        return this;
-    if(value > this.value) {
-      if(this.right !==null)
-        return this.right.findParent(value);
+    if(this.root.value === value)
+      return null;
+    return this._findParent(this.root, value);
+  }
+
+  _findParent(node, value){
+    if(node.left)
+      if(node.left.value === value)
+        return node;
+    if(node.right)
+      if(node.right.value === value)
+        return node;
+    if(value > node.value) {
+      if(node.right !==null)
+        return this._findParent(node.right, value);
       else
-        return false;
+        return null;
     }
-    if(this.left!== null)
-      return this.left.findParent(value);
+    if(node.left!== null)
+      return this._findParent(node.left, value);
     return null;
   }
 
   findMin(){
-    if(this.left)
-      return this.left.findMin();
-    return this;
+    return this._findMin(this.root);
   }
+
+  _findMin(node){
+    if(node.left)
+      return this._findMin(node.left);
+    return node;
+  }
+
   toString() {
-    return this._toString(this);
+    return this._toString(this.root);
   }
 
   _toString(node) {
@@ -73,11 +100,14 @@ class BinarySearchTree{
 
   remove(value){
     let node = this.find(value);
+    // console.log(n);
     if(!node){
       return null;
     }
+    //when removing the root node also reassign the key
     if(node.left && node.right){
-      let min = node.right.findMin();
+      let min = this._findMin(node.right);
+      console.log('min value', min.value);
       this.remove(min.value);
       return node.value = min.value;
     }
@@ -104,5 +134,13 @@ class BinarySearchTree{
   }
 
 }
+
+// class BSTNODE{
+//   constructor(value){
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
 
 module.exports = BinarySearchTree;
