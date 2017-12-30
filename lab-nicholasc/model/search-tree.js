@@ -33,47 +33,47 @@ class BinarySearchTree{
     return this._insert(node.right, nodeToInsert, key);
   }
 
-  find(value){
-    return this._find(this.root, value);
+  find(key){
+    return this._find(this.root, key);
   }
 
-  _find(node, value){
-    if(value=== node.value)
+  _find(node, key){
+    if(key=== node.key)
       return node;
 
-    if(value > node.value) {
+    if(key > node.key) {
       if(node.right !==null)
-        return this._find(node.right, value);
+        return this._find(node.right, key);
       else
         return false;
     }
     if(node.left!== null)
-      return this._find(node.left, value);
+      return this._find(node.left, key);
     else
       return false;
   }
 
-  findParent(value){
-    if(this.root.value === value)
+  findParent(key){
+    if(this.root.key === key)
       return null;
-    return this._findParent(this.root, value);
+    return this._findParent(this.root, key);
   }
 
-  _findParent(node, value){
+  _findParent(node, key){
     if(node.left)
-      if(node.left.value === value)
+      if(node.left.key === key)
         return node;
     if(node.right)
-      if(node.right.value === value)
+      if(node.right.key === key)
         return node;
-    if(value > node.value) {
+    if(key > node.key) {
       if(node.right !==null)
-        return this._findParent(node.right, value);
+        return this._findParent(node.right, key);
       else
         return null;
     }
     if(node.left!== null)
-      return this._findParent(node.left, value);
+      return this._findParent(node.left, key);
     return null;
   }
 
@@ -98,8 +98,8 @@ class BinarySearchTree{
   }
 
 
-  remove(value){
-    let node = this.find(value);
+  remove(key){
+    let node = this.find(key);
     // console.log(n);
     if(!node){
       return null;
@@ -107,28 +107,28 @@ class BinarySearchTree{
     //when removing the root node also reassign the key
     if(node.left && node.right){
       let min = this._findMin(node.right);
-      console.log('min value', min.value);
-      this.remove(min.value);
-      return node.value = min.value;
+      this.remove(min.key);
+      node.value = min.value;
+      return node.key = min.key;
     }
 
     if(node.left){
-      let parentNode = this.findParent(value);
-      if(parentNode.left.value === value)
+      let parentNode = this.findParent(key);
+      if(parentNode.left.key === key)
         return parentNode.left = node.left;
       return parentNode.right = node.left;
     }
     if(node.right){
-      let parentNode = this.findParent(value);
-      if(parentNode.left.value === value)
+      let parentNode = this.findParent(key);
+      if(parentNode.left.key === key)
         return parentNode.left = node.right;
       return parentNode.right = node.left;
     }
     if(!node.left && !node.right){
-      let parent = this.findParent(value);
-      if(parent.left.value === value)
+      let parent = this.findParent(key);
+      if(parent.left.key === key)
         parent.left = null;
-      if(parent.right.value === value)
+      if(parent.right.key === key)
         parent.right = null;
     }
   }

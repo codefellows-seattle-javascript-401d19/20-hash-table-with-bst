@@ -27,20 +27,19 @@ class HashTable{
 
     if(!this._buckets[hash]){
       this._buckets[hash]= new BST();
-      this._buckets[hash].insert(key, htValue);//TODO: make this BST;
+      this._buckets[hash].insert(key, htValue);
       return this;
     }
 
-    let node = this._buckets[hash].find(node => node.value.key === key);
-    //set a rootnode
-    //then find if there is a collision by seeing if the key already exists by searching for key
+    let node = this._buckets[hash].find(key);
+
     if(node){
-      node.value.htValue = htValue;
+      node.value = htValue;
       return this;
     }
-    // insert a new tree here rootNode.insert(key,value);
-    //return this;
-    this._buckets[hash].append(new LinkedList({key, htValue})); //NOTE: if not updating, creating new element- there is a collision
+
+    this._buckets[hash].insert(key, htValue);
+
     return this;
   }
 
@@ -51,10 +50,9 @@ class HashTable{
       return null;
     }
 
-    let node = this._buckets[hash].find(node => node.value.key === key);
-    //let node = this._buckets[hash].find(key);
+    let node = this._buckets[hash].find(key);
     if(node)
-      return node.value.htValue;
+      return node.value;
     return null;
   }
 
@@ -72,6 +70,7 @@ class HashTable{
 
     root.remove(key);
 
+    console.log(root);
     if(!root.key)
       this._buckets[hash] = null; //this here removes the hash if remove empties the Tree
 
