@@ -67,13 +67,11 @@ class HashTable{
 
     if(!node)
       return null;
-
+    console.log('removing from', node);
     root.remove(key);
 
-    console.log(root);
     if(!root.key)
-      this._buckets[hash] = null; //this here removes the hash if remove empties the Tree
-
+      this._buckets[hash] = null;
     return;
 
   }

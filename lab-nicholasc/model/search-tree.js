@@ -99,7 +99,13 @@ class BinarySearchTree{
 
 
   remove(key){
-    let node = this.find(key);
+    if(!this.findParent(key))
+      return this.root = null;
+    return this._remove(this.root, key);
+  }
+
+  _remove(node, key){
+    node = this.find(key);
     // console.log(n);
     if(!node){
       return null;
@@ -126,10 +132,14 @@ class BinarySearchTree{
     }
     if(!node.left && !node.right){
       let parent = this.findParent(key);
-      if(parent.left.key === key)
-        parent.left = null;
-      if(parent.right.key === key)
-        parent.right = null;
+      console.log('node', node);
+      console.log('parent', parent);
+      if (parent.left)
+        if(parent.left.key === key)
+          parent.left = null;
+      if(parent.right)
+        if(parent.right.key === key)
+          parent.right = null;
     }
   }
 
