@@ -117,6 +117,17 @@ describe('tests for bst.js', () => {
       testTree.remove(5);
       expect(testTree.root.key).toEqual(10);
     });
+
+    test('remove should not be destructive', () => {
+      const testTree2 = new BST();
+      testTree2.insert(10);
+      testTree2.insert(8);
+      testTree2.insert(12);
+      testTree2.insert(19);
+      testTree2.remove(10);
+      expect(testTree2.root.key).toEqual(12);
+      expect(testTree2.root.right.key).toEqual(19);
+    });
   });
 
 });

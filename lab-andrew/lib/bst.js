@@ -70,7 +70,11 @@ class BST {
     if (node.left && node.right){
       node.key = this._findMinKey(node.right);
       if (node.key === node.right.key){
-        node.right = null;
+        if (!node.right.right){
+          node.right = null;
+          return;
+        }
+        node.right = node.right.right;
         return;
       }
       return this._remove(node.right, node.key);
