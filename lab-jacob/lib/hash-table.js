@@ -1,6 +1,6 @@
 'use strict';
 
-const bst = require('');//bst require
+const bst = require('./binary-search-tree');//bst require
 
 module.exports = class HashTable{
   constructor(capacity= 1024){
@@ -20,7 +20,11 @@ module.exports = class HashTable{
     return rawHash % this._capacity;
   }
 
-  set(key,htValue){
+  _getBstId(key){
+    
+  }
+
+  set(key, htValue){
     let hash = this._generateHash(key);
 
     if(!this._buckets[hash]){
